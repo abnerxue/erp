@@ -101,7 +101,7 @@ export default {
       const h = this.$createElement;
       this.$notify({
         title: '账号密码',
-        message: h('i', { style: 'color: teal'}, '账号密码可以随意填写，为了测试效果填写的账号将会被存储为临时假 token'),
+        message: h('i', { style: 'color: teal'}, '账号密码同常孝天下app'),
         duration: 6000
       });
     },
