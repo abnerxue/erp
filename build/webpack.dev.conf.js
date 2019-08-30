@@ -83,7 +83,7 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`cxt-erp-project    is running here: http://${devWebpackConfig.devServer.host}:${port}`],
 //           notes: [`   _     _      _     _      _     _-     _     _      _     _      _     _      _     _      _     _      _     _      _     _
 //   (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)
 //    / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\      / ._. \\
@@ -93,7 +93,8 @@ module.exports = new Promise((resolve, reject) => {
 //  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._  _.' \`-' '._
 // (.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)(.-./\`-'\\.-.)
 //  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-'  \`-'     \`-' `]
-          notes: [`
+          notes: [
+         /*    `
                                                            $$$$$$\\        $$\\               $$\\           
                                                           $$  __$$\\       $$ |              \\__|          
 $$\\    $$\\ $$\\   $$\\  $$$$$$\\         $$\\   $$\\ $$\\   $$\\ $$ /  $$ | $$$$$$$ |$$$$$$\\$$$$\\  $$\\ $$$$$$$\\  
@@ -105,7 +106,9 @@ $$\\    $$\\ $$\\   $$\\  $$$$$$\\         $$\\   $$\\ $$\\   $$\\ $$ /  $$ | $$
                                                                                                           
                                                                                                           
                                                                                                           
-          `]
+          ` */
+          
+        ]
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()

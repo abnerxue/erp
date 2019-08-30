@@ -51,7 +51,7 @@
               </div>
               <div class="ewmicon">
                 <i class="iconfont xu-saomadenglu fa-2x iconcolor"></i>
-                <p>打开 微信 扫一扫登录</p>
+                <p>打开 常孝天下app 扫一扫登录</p>
               </div>
               <p class="smalltxt">
                 <router-link class="a" to="#">免费注册</router-link>
@@ -69,7 +69,7 @@ export default {
     return {
       smdl: true,
       loginForm: {
-        username: 'vue-xuadmin',
+        username: '1888888888',
         password: '123456'
       }
     }

@@ -15,8 +15,8 @@
                :unique-opened="$store.getters.uniquerouter"
                :collapse-transition="true"
       >
-      <p>表单</p>
-       <!--  <template v-for="(item,index) in $store.getters.routers" v-if="!item.hidden">
+      <!-- <p class='aside-p' @click='goform'>表单</p> -->
+       <template v-for="(item,index) in $store.getters.routers" v-if="!item.hidden">
           <el-submenu  v-if="!item.alone && item.children.length>0" :index="index+''">
             <template slot="title">
               <i :class="item.iconCls?item.iconCls:[fa,fa-server]"></i>
@@ -30,7 +30,7 @@
             <i :class="item.iconCls?item.iconCls:[fa,fa-file]"></i>
             <span slot="title">{{ $t(`routeNmae.${item.name}`) }}</span>
           </el-menu-item>
-        </template> -->
+        </template> 
 
       </el-menu>
     </el-aside>
@@ -52,7 +52,11 @@
       }
     },
     methods: {
+      goform(){
+          this.$router.push('/')
+      },
       selectmenu (key) {
+        // let router = this.$store.getters.routers
         let router = this.$store.getters.routers
         let name = ''
         let navTitle = function (path, routerARR) {
@@ -154,5 +158,10 @@
       }
     }
 
+  }
+  .aside-p{
+    height:2rem;
+    text-align:center;
+    color:#ffffff
   }
 </style>
