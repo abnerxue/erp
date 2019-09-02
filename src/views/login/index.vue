@@ -2,9 +2,9 @@
   <div id="login">
     <div class="loginConbox">
       <div class="header">
-        <!--<div class="logo">-->
-        <!--<img src="../../assets/logo.png">-->
-        <!--</div>-->
+        <div class="logo"> 
+        <img src="../../assets/logo.png">
+        </div>
       </div>
       <div class="loginBox">
         <div class="loginCon">

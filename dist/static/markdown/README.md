@@ -116,4 +116,4 @@ Using modular script loader :
 
 The MIT License.
 
-Copyright (c) 2015 Pandao
+Copyright (c) 2019 xst
