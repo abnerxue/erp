@@ -69,6 +69,30 @@ export default {
     this.selfAdaption()
   },
   methods: {
+    getBar(){
+      let _this = this;
+      let data = {
+       token:this.GLOBAL.token
+      };
+      console.log(JSON.stringify(data))
+      
+      this.barlist=[{
+
+      }]
+
+      this.$ajax.post('/cxt/base/rootMenus', _this.$qs.stringify(data), {
+          headers: _this.Base.initAjaxHeader(1, data)
+        })
+        .then(res => {
+             this.barList=res.data.data
+            let obj=$('.testp')
+                obj.text(this.barList)
+             console.log(this.barList)
+        });
+          
+     
+    },
+    
     // echart自适应
     selfAdaption () {
       let that = this
