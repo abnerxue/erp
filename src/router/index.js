@@ -47,6 +47,7 @@ let defaultRouter = [
     path: '/index',
     iconCls: 'fa fa-dashboard', // 图标样式class
     name: routeNmae.home,
+    // name: '主页index',
     component: Layout,
     alone: true,
     children: [
@@ -69,80 +70,81 @@ let defaultRouter = [
 ]
 
 let addRouter = [
-  {
-    path: '/',
-    iconCls: 'el-icon-tickets', // 图标样式class
-    name: routeNmae.article,
-    component: Layout,
-    children: [
-      {
-        path: '/addArticle',
-        iconCls: 'el-icon-edit-outline', // 图标样式class
-        name: routeNmae.publishArticle,
-        component: AddArticle,
-        children: []
-      },
-      {
-        path: '/addArticleEditor',
-        iconCls: 'el-icon-edit-outline', // 图标样式class
-        name: routeNmae.publishArticleEditor,
-        component: AddArticleEditor,
-        children: []
-      }
-    ]
-  },
-  {
-    path: '/',
-    iconCls: 'fa fa-paw', // 图标样式class
-    name: routeNmae.icon,
-    component: Layout,
-    children: [
-      {
-        path: '/icon',
-        iconCls: 'fa fa-life-ring', // 图标样式class
-        name: routeNmae.builtInIcon,
-        component: Icon,
-        children: []
-      }
-    ]
-  },
-  {
-    path: '/',
-    iconCls: 'fa fa-exchange', // 图标样式class
-    name: routeNmae.shuttleBox,
-    component: Layout,
-    children: [
-      {
-        path: '/transfer',
-        iconCls: 'fa fa-sign-in', // 图标样式class
-        name: routeNmae.demoShuttle,
-        component: Transfer,
-        children: []
-      }
-    ]
-  },
-  {
-    path: '/',
-    iconCls: 'fa fa-universal-access', // 图标样式class
-    name: routeNmae.permissions,
-    component: Layout,
-    children: [
-      {
-        path: '/pagePermissions',
-        iconCls: 'fa fa-expeditedssl', // 图标样式class
-        name: routeNmae.pageControl,
-        component: pagePermissions,
-        children: []
-      },
-      {
-        path: '/btnPermissions',
-        iconCls: 'fa fa-toggle-on', // 图标样式class
-        name: routeNmae.btnControl,
-        component: btnPermissions,
-        children: []
-      }
-    ]
-  },
+  // {
+  //   path: '/',
+  //   iconCls: 'el-icon-tickets', // 图标样式class
+  //   name: routeNmae.article,
+  //   // name: '主页indexdad',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/addArticle',
+  //       iconCls: 'el-icon-edit-outline', // 图标样式class
+  //       name: routeNmae.publishArticle,
+  //       component: AddArticle,
+  //       children: []
+  //     },
+  //     {
+  //       path: '/addArticleEditor',
+  //       iconCls: 'el-icon-edit-outline', // 图标样式class
+  //       name: routeNmae.publishArticleEditor,
+  //       component: AddArticleEditor,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-paw', // 图标样式class
+  //   name: routeNmae.icon,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/icon',
+  //       iconCls: 'fa fa-life-ring', // 图标样式class
+  //       name: routeNmae.builtInIcon,
+  //       component: Icon,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-exchange', // 图标样式class
+  //   name: routeNmae.shuttleBox,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/transfer',
+  //       iconCls: 'fa fa-sign-in', // 图标样式class
+  //       name: routeNmae.demoShuttle,
+  //       component: Transfer,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-universal-access', // 图标样式class
+  //   name: routeNmae.permissions,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/pagePermissions',
+  //       iconCls: 'fa fa-expeditedssl', // 图标样式class
+  //       name: routeNmae.pageControl,
+  //       component: pagePermissions,
+  //       children: []
+  //     },
+  //     {
+  //       path: '/btnPermissions',
+  //       iconCls: 'fa fa-toggle-on', // 图标样式class
+  //       name: routeNmae.btnControl,
+  //       component: btnPermissions,
+  //       children: []
+  //     }
+  //   ]
+  // },
   {
     path: '/',
     iconCls: 'fa fa-newspaper-o', // 图标样式class
@@ -263,50 +265,50 @@ let addRouter = [
       }
     ]
   },
-  {
-    path: '/',
-    iconCls: 'el-icon-edit', // 图标样式class
-    name: routeNmae.editor,
-    component: Layout,
-    meta: {role: ['superAdmin', 'admin']},
-    children: [
-      {
-        path: '/markdown',
-        iconCls: 'fa fa-file-code-o', // 图标样式class
-        name: routeNmae.markdown,
-        component: Markdown,
-        children: []
-      },
-      {
-        path: '/wangeditor',
-        iconCls: 'fa fa-file-code-o', // 图标样式class
-        name: routeNmae.wangeditor,
-        component: WangeditorView,
-        children: []
-      }
-    ]
-  },
-  {
-    path: '/',
-    iconCls: 'el-icon-setting', // 图标样式class
-    name: routeNmae.systemSettings,
-    component: Layout,
-    meta: {role: ['superAdmin']},
-    children: [
-      {
-        path: '/navClassifies',
-        iconCls: 'el-icon-menu', // 图标样式class
-        name: routeNmae.navMenu,
-        component: NavClassify,
-        children: []
-      }
-    ]
-  },
-  { path: '*',
-    redirect: '/404',
-    hidden: true,
-    children: []
-  },
+  // {
+  //   path: '/',
+  //   iconCls: 'el-icon-edit', // 图标样式class
+  //   name: routeNmae.editor,
+  //   component: Layout,
+  //   meta: {role: ['superAdmin', 'admin']},
+  //   children: [
+  //     {
+  //       path: '/markdown',
+  //       iconCls: 'fa fa-file-code-o', // 图标样式class
+  //       name: routeNmae.markdown,
+  //       component: Markdown,
+  //       children: []
+  //     },
+  //     {
+  //       path: '/wangeditor',
+  //       iconCls: 'fa fa-file-code-o', // 图标样式class
+  //       name: routeNmae.wangeditor,
+  //       component: WangeditorView,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'el-icon-setting', // 图标样式class
+  //   name: routeNmae.systemSettings,
+  //   component: Layout,
+  //   meta: {role: ['superAdmin']},
+  //   children: [
+  //     {
+  //       path: '/navClassifies',
+  //       iconCls: 'el-icon-menu', // 图标样式class
+  //       name: routeNmae.navMenu,
+  //       component: NavClassify,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // { path: '*',
+  //   redirect: '/404',
+  //   hidden: true,
+  //   children: []
+  // },
 
 ]
 export default new Router({

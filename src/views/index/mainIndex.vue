@@ -29,22 +29,22 @@
           </ul>
         </div> -->
       </el-col>
-      <el-col :span="8">
+      <!-- <el-col :span="8">
         <div class="card bbxx">
           <p class="title"><i class="fa fa-server"></i>版本信息</p>
           <div class="table">
             <p><span class="tit">当前版本</span>常孝天下后台管理v1.0.0</p>
             <p><span class="tit">基于框架</span>vue + element</p>
             <p><span class="tit">主要特色</span> 响应式 / 无限级菜单 / 权限管理 / 极简</p>
-           <!--  <p><span class="tit">获取渠道</span>
+            <p><span class="tit">获取渠道</span>
                 <span class="gitbox">
                   <a target="_blank" href="https://github.com/Nirongxu/vue-xuAdmin.git"><el-button type="primary" icon="el-icon-download" size="small">github</el-button></a>
                   <a target="_blank" href="https://gitee.com/nirongxu/xu-webplatform.git"><el-button type="primary" icon="el-icon-download" size="small">码云</el-button></a>
                 </span>
-            </p> -->
+            </p>
           </div>
         </div>
-      </el-col>
+      </el-col> -->
     </el-row>
     <!-- <el-row>
       <el-col :span="24">

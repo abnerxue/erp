@@ -7,8 +7,8 @@
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 const cn = {
   routeNmae: {
-    home: '主页',
-    article: '文章管理',
+    home: '会员资产',
+    article: '文章',
     publishArticle: '发表文章',
     publishArticleEditor: '发表文章-富文本',
     icon: '图标',
@@ -18,7 +18,7 @@ const cn = {
     permissions: '权限管理',
     pageControl: '页面权限',
     btnControl: '按钮权限',
-    table: '表格',
+    table: '会员信息录入',
     multiDataTable: '多选数据表格',
     filterTable: '筛选表格',
     dragSort: '拖拽排序',
@@ -27,7 +27,7 @@ const cn = {
     editor: '编辑器',
     markdown: 'markdown',
     wangeditor: 'wangeditor',
-    multiDirectory: '多级目录',
+    multiDirectory: '操作日志',
     'menu2-1': '二级-1',
     'menu2-2': '二级-2',
     'menu2-3': '二级-3',
