@@ -16,7 +16,7 @@ const Sanji2 = () => import('@/views/duoji/sanji2')
 const Siji = () => import('@/views/duoji/siji')
 const Wuji = () => import('@/views/duoji/wuji')
 const Transfer = () => import('@/views/transfer/transfer')
-const DataTable = () => import('@/views/table/dataTables')
+const DataTables = () => import('@/views/table/dataTables')
 const CxtTable = () => import('@/views/table/cxtTable')
 const CardTable = () => import('@/views/table/cardTable')
 const FilterTable = () => import('@/views/table/filterTable')
@@ -168,6 +168,13 @@ let addRouter = [
         component: CardTable,
         children: []
       },
+      /* {
+        path: '/dataTables',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.dataTables,
+        component: DataTables,
+        children: []
+      }, */
       /* {
         path: '/filterTable',
         iconCls: 'fa fa-sort-amount-asc', // 图标样式class

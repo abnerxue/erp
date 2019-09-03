@@ -3,15 +3,18 @@
       <p class="title"><i class="el-icon-tickets"></i>会员资产<el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
-    v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>
-  </el-input></p>
-      <el-table
-        border
-        :data="tableData"
-        style="width: 100%">
+    v-model="input" style='float:right;width:30%;margin:.1rem 0 .8rem 0;'>
+  </el-input><br/>   <el-button type="primary" style='margin:0 0 0 1rem;'>导出</el-button> </p>
+     <el-table
+          ref="multipleTable"
+          :data="tableData"
+          tooltip-effect="dark"
+          style="width: 100%"
+          @selection-change="handleSelectionChange">
         <el-table-column
-          type="index">
-        </el-table-column>
+            type="selection"
+            width="55">
+          </el-table-column>
         <el-table-column
           sortable
           prop="odd"
@@ -71,6 +74,7 @@ export default {
   name: 'maintable',
   data () {
     return {
+      input:'',
       tableData: [{
         odd: '201801012345601',
         name: '王小虎',
@@ -141,10 +145,23 @@ export default {
         amount: '2130元',
         date: '2018-01-05',
         tag: '虚拟'
-      }]
+      }],
+       multipleSelection: []
     }
   },
   methods: {
+    toggleSelection (rows) {
+      if (rows) {
+        rows.forEach(row => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange (val) {
+      this.multipleSelection = val;
+    },
     handleEdit (index, row) {
       console.log(index, row)
       this.$message({

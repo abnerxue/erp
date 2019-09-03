@@ -22,6 +22,7 @@ const en = {
     table: 'table',
     cardTable: 'cardTable',
     cxtTable: 'cxtTable',
+    dataTables:'dataTables',
     multiDataTable: 'multiDataTable',
     filterTable: 'filterTable',
     dragSort: 'dragSort',
