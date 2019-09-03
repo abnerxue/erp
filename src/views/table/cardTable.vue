@@ -1,6 +1,6 @@
 <template>
     <div>
-      <p class="title"><i class="el-icon-tickets"></i>会员资产<el-input
+      <p class="title"><i class="el-icon-tickets"></i>一卡通会员信息<el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>

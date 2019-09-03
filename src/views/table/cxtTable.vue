@@ -1,6 +1,16 @@
 <template>
     <div>
-      <p class="title"><i class="el-icon-tickets"></i>会员资产<el-input
+        <!-- <div class="demo-input-suffix">
+  
+  
+  <el-input
+    placeholder="请输入内容"
+    prefix-icon="el-icon-search"
+    v-model="input21">
+  </el-input>
+</div> -->
+
+      <p class="title"><i class="el-icon-tickets"></i>常孝通会员信息 <el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>

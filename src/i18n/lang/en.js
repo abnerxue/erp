@@ -20,6 +20,8 @@ const en = {
     pageControl: 'pageControl',
     btnControl: 'btnControl',
     table: 'table',
+    cardTable: 'cardTable',
+    cxtTable: 'cxtTable',
     multiDataTable: 'multiDataTable',
     filterTable: 'filterTable',
     dragSort: 'dragSort',

@@ -1,4 +1,5 @@
 import en from '../i18n/lang/en'
+import cn from '../i18n/lang/cn'
 import Vue from 'vue'
 import Router from 'vue-router'
 import CommerViews from '@/views/commerViews'
@@ -16,6 +17,8 @@ const Siji = () => import('@/views/duoji/siji')
 const Wuji = () => import('@/views/duoji/wuji')
 const Transfer = () => import('@/views/transfer/transfer')
 const DataTable = () => import('@/views/table/dataTables')
+const CxtTable = () => import('@/views/table/cxtTable')
+const CardTable = () => import('@/views/table/cardTable')
 const FilterTable = () => import('@/views/table/filterTable')
 const DragTable = () => import('@/views/table/dragTabe')
 const Upload = () => import('@/views/upload/upload')
@@ -152,13 +155,20 @@ let addRouter = [
     component: Layout,
     children: [
       {
-        path: '/dataTable',
+        path: '/cxtTable',
         iconCls: 'fa fa-sliders', // 图标样式class
-        name: routeNmae.multiDataTable,
-        component: DataTable,
+        name: routeNmae.cxtTable,
+        component: CxtTable,
         children: []
       },
       {
+        path: '/cardTable',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.cardTable,
+        component: CardTable,
+        children: []
+      },
+      /* {
         path: '/filterTable',
         iconCls: 'fa fa-sort-amount-asc', // 图标样式class
         name: routeNmae.filterTable,
@@ -171,7 +181,7 @@ let addRouter = [
         name: routeNmae.dragSort,
         component: DragTable,
         children: []
-      }
+      } */
     ]
   },
 
