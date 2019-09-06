@@ -205,14 +205,14 @@ let addRouter = [
         component: Erji,
         children: []
       },
-      {
+     /*  {
         path: '/erji2',
         iconCls: 'fa fa-server',
         name: routeNmae['menu2-2'],
         component: Erji2,
         children: []
-      },
-      {
+      }, */
+      /* {
         path: '/erji3',
         iconCls: 'fa fa-server',
         name: routeNmae['menu2-3'],
@@ -263,7 +263,7 @@ let addRouter = [
             ]
           }
         ]
-      }
+      } */
     ]
   },
   {

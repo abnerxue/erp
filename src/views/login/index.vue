@@ -47,7 +47,8 @@
             </div>
             <div class="ewmbox">
               <div class="ewm">
-                <img src="https://img.alicdn.com/tfscom/TB1ivYYyHvpK1RjSZFqwu3XUVXa.png">
+                <!-- <img src="https://img.alicdn.com/tfscom/TB1ivYYyHvpK1RjSZFqwu3XUVXa.png"> -->
+                <qriously :value="value" :size="size" :backgroundAlpha="backgroundAlpha" class="s-img-2" />
               </div>
               <div class="ewmicon">
                 <i class="iconfont xu-saomadenglu fa-2x iconcolor"></i>
@@ -67,6 +68,11 @@
 export default {
   data () {
     return {
+       // 二维码大小 默认 100
+      size: 190,
+      // 背景透明度，默认透明 0 
+      backgroundAlpha:1,
+      value:'',
       smdl: true,
       loginForm: {
         username: '1888888888',
@@ -74,7 +80,56 @@ export default {
       }
     }
   },
+  created(){
+   this.getcode()
+   
+  },
   methods: {
+     load(){
+      let data = {
+      
+      };
+   
+      let _this = this;
+       
+         
+      this.$ajax.get('/cxt/manager/request', JSON.stringify(), {//就是这里，
+          // headers: _this.Base.initAjaxHeader(1, data)
+        }).then(res => {
+          if(res.data.state==='000'){
+             // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
+        _this.$store.dispatch('setToken', 1).then(() => {
+          _this.$router.push({path: '/'})
+        })
+            /* this.$router.push({  ///这样跳转问什么
+              path:'/index'
+              
+            }) */
+          }else{
+            alert
+          }
+        
+           
+        });
+    },
+    getcode(){
+      let data = {
+      
+      };
+   
+      let _this = this;
+       
+         
+      this.$ajax.get('/cxt/manager/logCode', JSON.stringify(), {//就是这里，
+          // headers: _this.Base.initAjaxHeader(1, data)
+        }).then(res => {
+         this.value=res.data.data
+         this.load()
+         console.log( this.value)
+        
+           
+        });
+    },
     submitForm () {
       let that = this
       if (this.loginForm.username === '' || this.loginForm.password === '') {
@@ -85,7 +140,45 @@ export default {
         })
         return false
       } else {
-        // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
+            let _this = this;                     
+               /*  let data = {
+                //    pageNum : this.pageNum,
+                tel:_this.loginForm.username,
+                validation:_this.loginForm.password,
+                type:'password',
+                ctime:''
+                };    */                 
+      /*             let formData = new FormData();
+    formData.append("tel",_this.loginForm.username);
+
+         let data=this.formData */
+         /*          $.ajax({
+        type:'post',
+        url:'/cxt/base/login',
+        headers:{
+          Accept:'application/json;charset=utf-8',
+          
+        },
+        data:JSON.stringify(data),
+        contentType:'application/json',
+        dataType:'json',
+        success:function(data){
+          console.log('ok');
+        },
+        error:function(){
+          console.log(error)
+        }
+      }) */
+                this.$ajax.post('/cxt/base/login',{
+                 tel:_this.loginForm.username,
+                validation:_this.loginForm.password,
+                type:'password',
+               
+
+                }).then(res=>{
+                  
+                   if(res.data.state == '000') {
+                       // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
         that.$store.dispatch('setToken', that.loginForm.username).then(() => {
           that.$router.push({path: '/'})
         }).catch(res => {
@@ -95,6 +188,18 @@ export default {
             type: 'error'
           })
         })
+                    
+                           
+                            
+                   }
+                 
+                  else{
+                     
+                  }
+                
+                   console.log(res.data.data);
+               });
+       
       }
     },
     message() {

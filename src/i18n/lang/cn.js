@@ -31,7 +31,7 @@ const cn = {
     markdown: 'markdown',
     wangeditor: 'wangeditor',
     multiDirectory: '操作日志',
-    'menu2-1': '二级-1',
+    'menu2-1': '日志详情',
     'menu2-2': '二级-2',
     'menu2-3': '二级-3',
     'menu3-1': '三级-1',

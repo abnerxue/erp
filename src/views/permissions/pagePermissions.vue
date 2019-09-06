@@ -18,6 +18,7 @@
     name: 'pagePermissions',
     data () {
       return {
+        rolelist:'',
         permissions: this.$store.getters.info.role,
         options: {
           role: this.$store.getters.info.role,
@@ -26,9 +27,10 @@
       };
     },
     mounted (){
-      this.$store.dispatch('setRole', this.options)
+      // this.$store.dispatch('setRole', this.options)
+      this.getrole()
     },
-    watch: {
+    /* watch: {
       permissions (newQuestion, oldQuestion) {
         switch (newQuestion) {
           case 'superAdmin':
@@ -57,6 +59,32 @@
             path: '/pagePermissions'
           }, router: this.$router})
       }
+    }, */
+    methods:{
+            getrole(){
+          let data = {
+      
+         pid:5
+      };
+     console.log(data)
+     
+      let _this = this;
+         this.rolelist={
+           key:'',
+           img:'',
+           name:'',
+           id:''
+         }
+         
+      this.$ajax.post('/cxt/menu/sublist', _this.$qs.stringify(data), {
+          headers: _this.Base.initAjaxHeader(1, data)
+        }).then(res => {
+        
+         this.rolelist=res.data.data
+         console.log(this.rolelist)
+           
+        });
+    },
     }
   }
 </script>
