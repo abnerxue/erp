@@ -10,11 +10,11 @@
         <li>
           <langSelect></langSelect>
         </li>
-        <li>{{ $t(`role.${this.$store.getters.info.role}`) }}</li>
+        <li>{{rolelist.role}}</li>
         <li>
           <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">
-                    夏洛克丶旭<i class="el-icon-arrow-down el-icon--right"></i>
+                    {{rolelist.name}}<i class="el-icon-arrow-down el-icon--right"></i>
                   </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="a">{{ $t('userDropdownMenu.basicInfor') }}</el-dropdown-item>
@@ -23,7 +23,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </li>
-        <li class="icon"><img :src="avatar"/></li>
+        <li class="icon"><img :src="rolelist.img"/></li>
       </ul>
     </el-header>
     <tabNav></tabNav>
@@ -44,7 +44,35 @@
         avatar: './static/images/icon.jpg'
       }
     },
+    created(){
+ this.getrole()
+    },
     methods: {
+       getrole(){
+        /*   let data = {
+         token:this.GLOBAL.token,
+         pid:5
+      }; */
+      let params = new URLSearchParams();
+                  
+                      params.append('pid', 5);
+     
+     
+      let _this = this;
+         this.rolelist={
+           key:'',
+           img:'',
+           name:'',
+           id:''
+         }
+         
+      this.$ajax.post('/cxt/user/selfInfo', params).then(res => {
+        
+         this.rolelist=res.data.data
+         console.log(this.rolelist)
+           
+        });
+    },
       collapse () {
         this.$store.dispatch('collapse')
       },

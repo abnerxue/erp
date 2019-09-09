@@ -4,12 +4,13 @@
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>
-  </el-input><br/>   <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button></p>
+  </el-input><br/>   <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
       <el-table
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
           style="width: 100%"
+          v-loading="loading_status"
           @selection-change="handleSelectionChange">
         <el-table-column
             type="selection"
@@ -46,7 +47,7 @@
      <el-pagination
   background
   layout="prev, pager, next"
-  :total="1000">
+  :total="tableData.length">
 </el-pagination>
   </div>
 </template>
@@ -128,6 +129,7 @@ export default {
         date: '2018-01-05',
         tag: '虚拟'
       }],
+      loading_status:false,
        multipleSelection: []
       }
   },
@@ -139,7 +141,7 @@ export default {
              this.$ajax.get('/manager/users/excel', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
         }).then(res => {
-         this.tableData=res.data.data.list 
+        //  this.t=res.data.data.list 
      
          console.log( '导出')
         
@@ -154,16 +156,25 @@ export default {
    
       let _this = this;
        this.list=[]
-         
+         _this.loading_status = true;
       this.$ajax.get('/cxt/manager/logs', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
         }).then(res => {
-         this.list=res.data.data.list
+          if(res.data.state==='015'){
+            // _this.$router.push('/login');
+          }else{
+
+            this.tableData=res.data.data.list;
+          }
+
      
          console.log( this.list)
         
            
         });
+        setTimeout(()=>{
+          _this.loading_status = false;
+        },500)
     },
       toggleSelection (rows) {
       if (rows) {

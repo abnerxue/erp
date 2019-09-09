@@ -4,7 +4,7 @@
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>
-  </el-input> <br/>   <el-button type="primary" style='margin:0 0 0 1rem;'>导出</el-button></p>
+  </el-input> <br/>   <el-button type="primary" style='margin:0 0 0 1rem;'>导出</el-button>  <el-button type="primary" style='margin:0 0 0 1rem;'>刷新</el-button></p>
        <el-table
           ref="multipleTable"
           :data="tableData"

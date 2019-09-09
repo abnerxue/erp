@@ -141,41 +141,13 @@ export default {
         return false
       } else {
             let _this = this;                     
-               /*  let data = {
-                //    pageNum : this.pageNum,
-                tel:_this.loginForm.username,
-                validation:_this.loginForm.password,
-                type:'password',
-                ctime:''
-                };    */                 
-      /*             let formData = new FormData();
-    formData.append("tel",_this.loginForm.username);
-
-         let data=this.formData */
-         /*          $.ajax({
-        type:'post',
-        url:'/cxt/base/login',
-        headers:{
-          Accept:'application/json;charset=utf-8',
-          
-        },
-        data:JSON.stringify(data),
-        contentType:'application/json',
-        dataType:'json',
-        success:function(data){
-          console.log('ok');
-        },
-        error:function(){
-          console.log(error)
-        }
-      }) */
-                this.$ajax.post('/cxt/base/login',{
-                 tel:_this.loginForm.username,
-                validation:_this.loginForm.password,
-                type:'password',
-               
-
-                }).then(res=>{
+                                 
+                let params = new URLSearchParams();
+                   params.append('tel', _this.loginForm.username);
+                     params.append('validation', _this.loginForm.password);
+                      params.append('type', 'password');
+                       
+                this.$ajax.post('/cxt/base/login',params).then(res=>{
                   
                    if(res.data.state == '000') {
                        // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
