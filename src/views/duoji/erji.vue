@@ -138,7 +138,7 @@ export default {
   },
    methods: {
      derive(){
-             this.$ajax.get('/manager/users/excel', JSON.stringify(), {//就是这里，
+             this.$ajax.get('/cxt/manager/users/excel', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
         }).then(res => {
         //  this.t=res.data.data.list 
