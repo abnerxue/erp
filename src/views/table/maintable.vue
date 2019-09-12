@@ -185,7 +185,7 @@ export default {
             // _this.$router.push('/login');
           }else{
 
-            this.tableData=res.data.data.list;
+            // this.tableData=res.data.data.list;
           }
 
      

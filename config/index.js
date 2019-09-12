@@ -8,9 +8,9 @@ const ips = {
     // dev: 'http://192.168.31.221:8083/'//代理的接口地址
     // dev: 'https://cxtx.info:8443/'
     // dev: 'http://192.168.0.194:8080/'
-    //  dev: 'https://47.103.129.40:8443/'
+     dev: 'https://47.103.129.40:8443/'
     // dev: 'http://192.168.0.194:8080/'
-    dev: 'http://47.103.129.40:8080/'
+  //  dev: 'http://47.103.129.40:8080/'
     // dev: 'http://47.103.100.232:8080/'
 };
 // let target = ips[process.env.npm_lifecycle_event];

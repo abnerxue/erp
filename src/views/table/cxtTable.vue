@@ -13,7 +13,7 @@
       <p class="title"><i class="el-icon-tickets"></i>常孝通会员信息 <el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
-    v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>
+    v-model="input" style='float:right;width:30%;margin-bottom:.8rem;'>
   </el-input><br/>   <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
       <el-table
           ref="multipleTable"
@@ -89,6 +89,7 @@ export default {
   name: 'maintable',
   data () {
     return {
+      input:'',
       tableData: [{
         odd: '201801012345601',
         name: '王小虎',
@@ -194,7 +195,7 @@ export default {
             // _this.$router.push('/login');
           }else{
 
-            this.tableData=res.data.data.list;
+            // this.tableData=res.data.data.list;
           }
 
      
