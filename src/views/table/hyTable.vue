@@ -12,20 +12,26 @@
   width="30%"
   :before-close="handleClose">
  <el-form ref="form" :model="form" label-width="100px">
+     <el-form-item label="姓名">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
   <el-form-item label="手机号">
     <el-input v-model="form.tel"></el-input>
   </el-form-item>
-  <el-form-item label="常孝通数量">
-    <el-input v-model="form.cxtn" style="width: 60%;"></el-input>
+  <el-form-item label="上级手机号">
+    <el-input v-model="form.tel1"></el-input>
   </el-form-item>
-  <el-form-item label="解锁日期">
-   <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+  <el-form-item label="推荐人手机号">
+    <el-input v-model="form.tel2"></el-input>
   </el-form-item>
-  <el-form-item label="锁定期限">
-    <el-input v-model="form.sdt" style="width: 60%;"></el-input>
-  </el-form-item>
-  <el-form-item label="释放比例">
-    <el-input v-model="form.sdt" style="width: 60%;"></el-input>
+   <el-form-item label="级别">
+    <el-select v-model="form.region" placeholder="请选择级别">
+      <el-option label="康养顾问" value="shanghai"></el-option>
+      <el-option label="业务经理" value="beijing"></el-option>
+      <el-option label="区域经理" value="shanghai"></el-option>
+      <el-option label="总经理" value="beijing"></el-option>
+       <el-option label="员工" value="beijing"></el-option>
+    </el-select>
   </el-form-item>
 
   
@@ -90,6 +96,7 @@ export default {
   data () {
     return {
          form: {
+             region:'',
          tel: '',
         cxtn: '',
         data1:'',
@@ -142,7 +149,7 @@ export default {
             // _this.$router.push('/login');
           }else{
 
-            this.tableData=res.data.data.list;
+            // this.tableData=res.data.data.list;
           }
 
      

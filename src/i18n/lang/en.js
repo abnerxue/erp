@@ -20,6 +20,7 @@ const en = {
     pageControl: 'pageControl',
     btnControl: 'btnControl',
     table: 'table',
+    hyTable: 'hyTable',
     cardTable: 'cardTable',
     cxtTable: 'cxtTable',
     dataTables:'dataTables',

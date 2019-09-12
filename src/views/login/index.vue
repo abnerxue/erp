@@ -29,11 +29,11 @@
               <el-form-item>
                 <el-button class="subBtn" type="primary" @click="submitForm">登录</el-button>
               </el-form-item>
-              <p class="smalltxt">
+             <!--  <p class="smalltxt">
                 <router-link class="a" to="#">忘记密码</router-link>
                 <router-link class="a" to="#">忘记会员名</router-link>
                 <router-link class="a" to="#">免费注册</router-link>
-              </p>
+              </p> -->
             </el-form>
           </el-card>
 
@@ -75,8 +75,8 @@ export default {
       value:'',
       smdl: true,
       loginForm: {
-        username: '1888888888',
-        password: '123456'
+        username: '',
+        password: ''
       }
     }
   },

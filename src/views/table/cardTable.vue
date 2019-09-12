@@ -3,8 +3,54 @@
       <p class="title"><i class="el-icon-tickets"></i>一卡通会员信息<el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
-    v-model="input21" style='float:right;width:30%;margin-bottom:.8rem;'>
-  </el-input> <br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+    v-model="input" style='float:right;width:30%;margin-bottom:.8rem;'>
+  </el-input> <br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+      <el-dialog
+  title="新增一卡通会员信息"
+  :visible.sync="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+ 
+ <el-form ref="form" :model="form" label-width="120px">
+  <el-form-item label="手机号">
+    <el-input v-model="form.tel"></el-input>
+  </el-form-item>
+  <el-form-item label="一卡通号">
+    <el-input v-model="form.cardn" style="width: 60%;"></el-input>
+  </el-form-item>
+  <el-form-item label="购卡日期">
+   <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+  </el-form-item>
+  <el-form-item label="可买常孝通日期">
+   <el-date-picker type="date" placeholder="选择日期" v-model="form.date2" style="width: 100%;"></el-date-picker>
+  </el-form-item>
+  <el-form-item label="金额">
+    <el-input v-model="form.money" style="width: 60%;"></el-input>
+  </el-form-item>
+  <el-form-item label="有效期">
+    <el-input v-model="form.yxq" style="width: 60%;"></el-input>
+  </el-form-item>
+  <el-form-item label="积分额度">
+    <el-input v-model="form.jfed" style="width: 60%;"></el-input>
+  </el-form-item>
+  
+  
+ 
+ 
+  
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button>取消</el-button>
+  </el-form-item>
+</el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+      
+      
+      
        <el-table
           ref="multipleTable"
           :data="tableData"
@@ -79,77 +125,19 @@ export default {
   name: 'maintable',
   data () {
     return {
-      tableData: [{
-        odd: '201801012345601',
-        name: '王小虎',
-        status: '已付款',
-        amount: '580元',
-        date: '2018-01-01',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345602',
-        name: '王小虎',
-        status: '已付款',
-        amount: '130元',
-        date: '2018-01-02',
-        tag: '实物'
-      }, {
-        odd: '201801012345603',
-        name: '王小虎',
-        status: '已付款',
-        amount: '680元',
-        date: '2018-01-03',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345604',
-        name: '王小虎',
-        status: '已付款',
-        amount: '190元',
-        date: '2018-01-03',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345605',
-        name: '王小虎',
-        status: '已付款',
-        amount: '170元',
-        date: '2018-01-04',
-        tag: '实物'
-      }, {
-        odd: '201801012345606',
-        name: '王小虎',
-        status: '已付款',
-        amount: '670元',
-        date: '2018-01-04',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345607',
-        name: '王小虎',
-        status: '已付款',
-        amount: '1780元',
-        date: '2018-01-04',
-        tag: '实物'
-      }, {
-        odd: '201801012345608',
-        name: '王小虎',
-        status: '已付款',
-        amount: '3180元',
-        date: '2018-01-04',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345609',
-        name: '王小虎',
-        status: '已付款',
-        amount: '780元',
-        date: '2018-01-05',
-        tag: '实物'
-      }, {
-        odd: '201801012345610',
-        name: '王小虎',
-        status: '已付款',
-        amount: '2130元',
-        date: '2018-01-05',
-        tag: '虚拟'
-      }],
+       form: {
+         tel: '',
+          cardn: '',
+          date1: '',
+          date2: '',
+          money: '',
+          
+          yxq: '',
+          jfed: ''
+        },
+        dialogVisible: false,
+      input:'',
+      tableData: [{}],
        multipleSelection: []
     }
   },
@@ -157,6 +145,17 @@ export default {
     this.getlist()
   },
   methods: {
+     onSubmit() {
+        console.log('submit!');
+      },
+     handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
+  
      derive(){
              this.$ajax.get('/cxt/manager/users/excel', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
@@ -184,7 +183,7 @@ export default {
             // _this.$router.push('/login');
           }else{
 
-            this.tableData=res.data.data.list;
+            // this.tableData=res.data.data.list;
           }
 
      

@@ -17,6 +17,7 @@ const Siji = () => import('@/views/duoji/siji')
 const Wuji = () => import('@/views/duoji/wuji')
 const Transfer = () => import('@/views/transfer/transfer')
 const DataTables = () => import('@/views/table/dataTables')
+const HyTable = () => import('@/views/table/hyTable')
 const CxtTable = () => import('@/views/table/cxtTable')
 const CardTable = () => import('@/views/table/cardTable')
 const FilterTable = () => import('@/views/table/filterTable')
@@ -154,6 +155,13 @@ let addRouter = [
     name: routeNmae.table,
     component: Layout,
     children: [
+      {
+        path: '/hyTable',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.hyTable,
+        component: HyTable,
+        children: []
+      },
       {
         path: '/cxtTable',
         iconCls: 'fa fa-sliders', // 图标样式class

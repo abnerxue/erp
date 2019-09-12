@@ -21,6 +21,7 @@ const cn = {
     table: '会员信息录入',
     multiDataTable: '多选数据表格',
     dataTables: '一卡通信息录入',
+    hyTable: '会员信息录入',
     cardTable: '一卡通信息录入',
     cxtTable: '常孝通信息录入',
     filterTable: '筛选表格',

@@ -4,7 +4,20 @@
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input" style='float:right;width:30%;margin:.1rem 0 .8rem 0;'>
-  </el-input><br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+  </el-input><br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button>  <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+      <el-dialog
+  title="新增会员资产信息"
+  :visible.sync="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+  <span></span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+     
+    
      <el-table
           ref="multipleTable"
           :data="tableData"
@@ -33,43 +46,14 @@
           prop="amount"
           label="金额">
         </el-table-column>
-        <el-table-column
-          prop="date"
-          label="下单时间"
-          sortable
-          :filters="[{text: '2018-01-01', value: '2018-01-01'}, {text: '2018-01-02', value: '2018-01-02'}, {text: '2018-01-03', value: '2018-01-03'}, {text: '2018-01-04', value: '2018-01-04'}, {text: '2018-01-05', value: '2018-01-05'}]"
-          :filter-method="filterHandler"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="tag"
-          label="订单分类"
-          width="150"
-          :filters="[{ text: '虚拟', value: '虚拟' }, { text: '实物', value: '实物' }]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end">
-          <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.tag === '虚拟' ? 'primary' : 'success'"
-              disable-transitions>{{scope.row.tag}}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">详情</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
+       
+     
+        
       </el-table>
         <el-pagination
   background
   layout="prev, pager, next"
-  :total="1000">
+  :total="1">
 </el-pagination>
     </div>
 </template>
@@ -79,77 +63,10 @@ export default {
   name: 'maintable',
   data () {
     return {
+         dialogVisible: false,
       input:'',
       tableData: [{
-        odd: '201801012345601',
-        name: '王小虎',
-        status: '已付款',
-        amount: '580元',
-        date: '2018-01-01',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345602',
-        name: '王小虎',
-        status: '已付款',
-        amount: '130元',
-        date: '2018-01-02',
-        tag: '实物'
-      }, {
-        odd: '201801012345603',
-        name: '王小虎',
-        status: '已付款',
-        amount: '680元',
-        date: '2018-01-03',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345604',
-        name: '王小虎',
-        status: '已付款',
-        amount: '190元',
-        date: '2018-01-03',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345605',
-        name: '王小虎',
-        status: '已付款',
-        amount: '170元',
-        date: '2018-01-04',
-        tag: '实物'
-      }, {
-        odd: '201801012345606',
-        name: '王小虎',
-        status: '已付款',
-        amount: '670元',
-        date: '2018-01-04',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345607',
-        name: '王小虎',
-        status: '已付款',
-        amount: '1780元',
-        date: '2018-01-04',
-        tag: '实物'
-      }, {
-        odd: '201801012345608',
-        name: '王小虎',
-        status: '已付款',
-        amount: '3180元',
-        date: '2018-01-04',
-        tag: '虚拟'
-      }, {
-        odd: '201801012345609',
-        name: '王小虎',
-        status: '已付款',
-        amount: '780元',
-        date: '2018-01-05',
-        tag: '实物'
-      }, {
-        odd: '201801012345610',
-        name: '王小虎',
-        status: '已付款',
-        amount: '2130元',
-        date: '2018-01-05',
-        tag: '虚拟'
+
       }],
        multipleSelection: []
     }
@@ -158,6 +75,13 @@ export default {
     this.getlist()
   },
   methods: {
+     handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      },
      derive(){
              this.$ajax.get('/cxt/manager/users/excel', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
@@ -185,7 +109,7 @@ export default {
             // _this.$router.push('/login');
           }else{
 
-            this.tableData=res.data.data.list;
+            // this.tableData=res.data.data.list;
           }
 
      
