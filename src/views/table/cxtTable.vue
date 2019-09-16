@@ -115,6 +115,7 @@ export default {
           })
           .catch(_ => {});
       },
+      //555
      derive(){
              this.$ajax.get('/cxt/manager/users/excel', JSON.stringify(), {//就是这里，
           // headers: _this.Base.initAjaxHeader(1, data)
