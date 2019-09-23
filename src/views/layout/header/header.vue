@@ -68,8 +68,8 @@
            id:''
          }
          
-      this.$ajax.post('/cxt/user/selfInfo', params).then(res => {
-        
+      this.$ajax.post('/cxt/manager/selfInfo', params).then(res => {
+          console.log(document.cookie);
          this.rolelist=res.data.data
          console.log(this.rolelist)
            
@@ -106,8 +106,9 @@
       },
       handleCommand (command) {
         if (command === 'logout') {
-          Cookies.remove('token');
-          location.reload()
+          this.$router.push('/login')
+        /*   Cookies.remove('token');
+          location.reload() */
 
         }
       }

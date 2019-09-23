@@ -21,7 +21,7 @@ Vue.use(VueQriously);
 
 // 全局引入公共js
 import Base from '../static/base';
-
+axios.defaults.withCredentials=true;
 Vue.prototype.$ajax = axios;
 
 

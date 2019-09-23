@@ -4,7 +4,9 @@
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input" style='float:right;width:30%;margin:.1rem 0 .8rem 0;'>
-  </el-input><br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button>  <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+  </el-input><br/>    
+  <!-- <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button>  -->
+   <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
       <el-dialog
   title="新增会员资产信息"
   :visible.sync="dialogVisible"

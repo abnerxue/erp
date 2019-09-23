@@ -98,13 +98,11 @@ export default {
         }).then(res => {
           if(res.data.state==='000'){
              // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
+            //  _this.$router.push({path: '/'})
         _this.$store.dispatch('setToken', 1).then(() => {
           _this.$router.push({path: '/'})
         })
-            /* this.$router.push({  ///这样跳转问什么
-              path:'/index'
-              
-            }) */
+          
           }else{
             alert
           }
@@ -146,12 +144,15 @@ export default {
                    params.append('tel', _this.loginForm.username);
                      params.append('validation', _this.loginForm.password);
                       params.append('type', 'password');
-                       
-                this.$ajax.post('/cxt/base/login',params).then(res=>{
-                  
+                       console.log(this.$ajax);
+                this.$ajax.post('/cxt/manager/passin',params,{headers: {'Authorization': 666666},withCredentials:true}).then(res=>{
+                  console.log(res.headers);
+                  console.log(document.cookie);
                    if(res.data.state == '000') {
+                      // that.$router.push({path: '/'})
                        // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
         that.$store.dispatch('setToken', that.loginForm.username).then(() => {
+          console.log('========');
           that.$router.push({path: '/'})
         }).catch(res => {
           that.$message({
@@ -160,7 +161,7 @@ export default {
             type: 'error'
           })
         })
-                    
+                  
                            
                             
                    }

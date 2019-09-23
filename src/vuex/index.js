@@ -9,17 +9,28 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    // token: Cookies.get('token')
     token: Cookies.get('token')
   },
   mutations: {
     setToken (state, token) {
-      state.token = token
-      Cookies.set('token', token ,{ expires: 1/24 });
+    if(token==undefined){
+      token=''
     }
+      state.token = token
+      // debugger;
+      // console.log(Cookie);
+      Cookies.set('token', token ,{ expires: 1/24 });
+      // Cookies.set('token', token ,{ expires: 1/24 });
+     }
   },
   actions: {
+    
     setToken ({commit}, token) {
       return new Promise((resolve, reject) => {
+        if(token==undefined){
+          token=''
+        }
         commit('setToken', token)
         resolve()
       })
