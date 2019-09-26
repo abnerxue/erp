@@ -18,7 +18,7 @@ const cn = {
     permissions: '权限管理',
     pageControl: '页面权限',
     btnControl: '按钮权限',
-    table: '会员信息录入',
+    table: '会员信息管理',
     multiDataTable: '多选数据表格',
     dataTables: '一卡通信息录入',
     hyTable: '会员信息录入',

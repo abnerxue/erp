@@ -66,7 +66,8 @@ export default {
   name: 'mainIndex',
   components: {Maintable, LineEcharts},
   mounted () {
-    this.selfAdaption()
+    this.selfAdaption();
+    console.log(this.$router);
   },
   methods: {
     getBar(){

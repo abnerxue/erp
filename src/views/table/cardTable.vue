@@ -40,13 +40,10 @@
   
   <el-form-item>
     <el-button type="primary" @click="onSubmit">立即创建</el-button>
-    <el-button>取消</el-button>
+    <el-button @click="dialogVisible = false">取消</el-button>
   </el-form-item>
 </el-form>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
+  
 </el-dialog>
       
       
@@ -63,23 +60,35 @@
           </el-table-column>
         <el-table-column
           sortable
-          prop="odd"
-          label="订单号">
+          prop="tel"
+          label="手机号">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="收货人">
+          prop="cardno"
+          label="一卡通号">
         </el-table-column>
         <el-table-column
-          prop="status"
-          label="订单状态"
+          prop="ctime"
+          label="购卡日期"
           width="130">
         </el-table-column>
         <el-table-column
-          prop="amount"
+          prop="unlock"
+          label="可买常孝通日期">
+        </el-table-column>
+         <el-table-column
+          prop="money"
           label="金额">
         </el-table-column>
-        <el-table-column
+         <el-table-column
+          prop="drawday"
+          label="有效期">
+        </el-table-column>
+         <el-table-column
+          prop="score"
+          label="积分额度">
+        </el-table-column>
+       <!--  <el-table-column
           prop="date"
           label="下单时间"
           sortable
@@ -110,13 +119,17 @@
               type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
-        <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="10">
-</el-pagination>
+       <el-pagination
+      background
+      page-size='20'
+      :size-change="handleSizeChange"
+      :current-change="handleCurrentChange"
+      :current-page="currentPage"
+      layout="prev, pager, next"
+      :total='this.pagen'
+    ></el-pagination>
     </div>
 </template>
 
@@ -135,6 +148,10 @@ export default {
           yxq: '',
           jfed: ''
         },
+        pagen:1,
+         currentPage: 1, //初始页
+      pagesize: 20, //    每页的数据
+       loading_status: false,
         dialogVisible: false,
       input:'',
       tableData: [{}],
@@ -145,9 +162,130 @@ export default {
     this.getlist()
   },
   methods: {
-     onSubmit() {
+    onSubmit() {
+       let _this=this
+          let params = new URLSearchParams();
+            params.append('cardno', this.form.cardn);
+             params.append('money', this.form.money);
+              params.append('ctime', this.form.data1);
+             params.append('unlock', this.form.data2);
+              params.append('score', this.form.jfed);
+               params.append('drawday', this.form.yxq);
+                params.append('drawday', this.form.tel);
+             
+     
+             console.log(params)
+       this.list=[]
+        //  _this.loading_status = true;
+      this.$ajax.post('/cxt//manager/card/in', params).then(res => {
+          if(res.data.state==='015'){
+             _this.$router.push('/login');
+          }else if(res.data.state!=='000'){
+                this.$message({
+          showClose: true,
+          message: res.data.msg,
+          type: "error"
+        });
+              
+          }else if(res.data.state==='000'){
+             this.$message({
+          showClose: true,
+          message: res.data.msg,
+          type: "success"
+        });
+          this.$router.push({path:'/hytable'})
+          }
+
+     
+         
+        
+           
+        });
+          this.dialogVisible = false
         console.log('submit!');
       },
+     handleSizeChange: function(size) {
+      this.pagesize = size;
+      console.log(this.pagesize); //每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage;
+      console.log(this.currentPage); //点击第几页
+      this.handleUserList()
+    },
+    handleUserList(currentPage) {
+     let params = new URLSearchParams();
+            params.append('page', this.currentPage);
+             params.append('size', 20);
+      this.$ajax
+        .post("/cxt/manager/card/out",  params)
+        .then(res => {
+         if(res.data.state==='015'){
+             _this.$router.push('/login');
+          }else{
+            this.pagen=res.data.data.total
+             console.log(res.data)
+           this.tableData=res.data.list
+          
+            console.log( this.tableData)
+           
+          }
+        });
+    },
+    derive() {
+      this.$ajax
+        .get("/cxt/manager/users/excel", JSON.stringify(), {
+          //就是这里，
+          // headers: _this.Base.initAjaxHeader(1, data)
+        })
+        .then(res => {
+          //  this.t=res.data.data.list
+
+          console.log("导出");
+        });
+    },
+      getlist(){
+        let _this=this
+          let params = new URLSearchParams();
+            params.append('page', 1);
+             params.append('size', 20);
+     
+   
+       this.list=[]
+         _this.loading_status = true;
+      this.$ajax.get('/cxt/manager/card/out', params).then(res => {
+          if(res.data.state==='015'){
+             _this.$router.push('/login');
+          }else{
+                
+                this.pagen=res.data.data.total
+                console.log(this.pagen)
+            this.tableData=res.data.data.list
+            console.log(this.tableData)
+          }
+
+     
+         
+        
+           
+        });
+        setTimeout(()=>{
+          _this.loading_status = false;
+        },500)
+    },
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach(row => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+     
      handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -167,34 +305,7 @@ export default {
            
         });
      },
-      getlist(){
-      let data = {
-        page:1,
-        size:20
-      };
-   
-      let _this = this;
-       this.list=[]
-         _this.loading_status = true;
-      this.$ajax.get('/cxt/manager/users/json', JSON.stringify(), {//就是这里，
-          // headers: _this.Base.initAjaxHeader(1, data)
-        }).then(res => {
-          if(res.data.state==='015'){
-            // _this.$router.push('/login');
-          }else{
-
-            // this.tableData=res.data.data.list;
-          }
-
-     
-         console.log( this.list)
-        
-           
-        });
-        setTimeout(()=>{
-          _this.loading_status = false;
-        },500)
-    },
+ 
       toggleSelection (rows) {
       if (rows) {
         rows.forEach(row => {

@@ -27,22 +27,28 @@ Vue.prototype.$ajax = axios;
 
 //  获取角色信息，根据用户权限动态加载路由
 router.beforeEach((to, from, next) => {
-  console.log(store.getters.token)
+  // console.log(store.getters.token)
   // debugger
-
-  if (store.getters.token) {
+  console.log(store.getters);
+  
+  localStorage.getItem("token");
+  // if (store.getters.token) {
+    if (localStorage.getItem("token")) {
   /*   store.dispatch('setToken', store.getters.token)
     if (to.path === '/login') {
       next({path: '/'})
     } else { */
-      if (!store.getters.info.role) {
+      // if (!store.getters.info.role) {
+        // if (!Cookies) {
+          if (!localStorage.getItem("token")) {
         // const role = ['/markdown', '/erji', '/erji2', '/siji', '/wuji']
         !async function getAddRouters () {
-          await store.dispatch('getInfo', store.getters.token)
-          await store.dispatch('newRoutes', store.getters.info.role)
+          // await store.dispatch('getInfo', store.getters.token)
+          // await store.dispatch('getInfo', store.getters.Cookies)
+          // await store.dispatch('newRoutes', store.getters.info.role)
           console.log(store.getters.addRouters)
-          await router.addRoutes(store.getters.addRouters)
-          next({path: '/index'})
+          // await router.addRoutes(store.getters.addRouters)
+           next({path: '/index'})//刷新直接登录
         }()
       } else {
         let is404 = to.matched.some(record => {

@@ -32,7 +32,7 @@
       layoutAside
     },
     created () {
-      this.$router.push('/index')
+      // this.$router.push('/index')
     }
   }
 </script>

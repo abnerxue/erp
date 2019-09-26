@@ -71,6 +71,206 @@ let defaultRouter = [
     hidden: true,
     children: []
   },
+  // {
+  //   path: '/',
+  //   iconCls: 'el-icon-tickets', // 图标样式class
+  //   name: routeNmae.article,
+  //   // name: '主页indexdad',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/addArticle',
+  //       iconCls: 'el-icon-edit-outline', // 图标样式class
+  //       name: routeNmae.publishArticle,
+  //       component: AddArticle,
+  //       children: []
+  //     },
+  //     {
+  //       path: '/addArticleEditor',
+  //       iconCls: 'el-icon-edit-outline', // 图标样式class
+  //       name: routeNmae.publishArticleEditor,
+  //       component: AddArticleEditor,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-paw', // 图标样式class
+  //   name: routeNmae.icon,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/icon',
+  //       iconCls: 'fa fa-life-ring', // 图标样式class
+  //       name: routeNmae.builtInIcon,
+  //       component: Icon,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-exchange', // 图标样式class
+  //   name: routeNmae.shuttleBox,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/transfer',
+  //       iconCls: 'fa fa-sign-in', // 图标样式class
+  //       name: routeNmae.demoShuttle,
+  //       component: Transfer,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/',
+  //   iconCls: 'fa fa-universal-access', // 图标样式class
+  //   name: routeNmae.permissions,
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '/pagePermissions',
+  //       iconCls: 'fa fa-expeditedssl', // 图标样式class
+  //       name: routeNmae.pageControl,
+  //       component: pagePermissions,
+  //       children: []
+  //     },
+  //     {
+  //       path: '/btnPermissions',
+  //       iconCls: 'fa fa-toggle-on', // 图标样式class
+  //       name: routeNmae.btnControl,
+  //       component: btnPermissions,
+  //       children: []
+  //     }
+  //   ]
+  // },
+  {
+    path: '/',
+    iconCls: 'fa fa-newspaper-o', // 图标样式class
+    name: routeNmae.table,
+    component: Layout,
+    children: [
+      {
+        path: '/hyTable',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.hyTable,
+        component: HyTable,
+        children: []
+      },
+      {
+        path: '/cxtTable',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.cxtTable,
+        component: CxtTable,
+        children: []
+      },
+      {
+        path: '/cardTable',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.cardTable,
+        component: CardTable,
+        children: []
+      },
+      /* {
+        path: '/dataTables',
+        iconCls: 'fa fa-sliders', // 图标样式class
+        name: routeNmae.dataTables,
+        component: DataTables,
+        children: []
+      }, */
+      /* {
+        path: '/filterTable',
+        iconCls: 'fa fa-sort-amount-asc', // 图标样式class
+        name: routeNmae.filterTable,
+        component: FilterTable,
+        children: []
+      },
+      {
+        path: '/dragTabe',
+        iconCls: 'fa fa-hand-stop-o', // 图标样式class
+        name: routeNmae.dragSort,
+        component: DragTable,
+        children: []
+      } */
+    ]
+  },
+
+  {
+    path: '/',
+    iconCls: 'fa fa-server',
+    name: routeNmae.multiDirectory,
+    component: Layout,
+    children: [
+      {
+        path: '/erji1',
+        iconCls: 'fa fa-server',
+        name: routeNmae['menu2-1'],
+        component: Erji,
+        children: []
+      },
+     /*  {
+        path: '/erji2',
+        iconCls: 'fa fa-server',
+        name: routeNmae['menu2-2'],
+        component: Erji2,
+        children: []
+      }, */
+      /* {
+        path: '/erji3',
+        iconCls: 'fa fa-server',
+        name: routeNmae['menu2-3'],
+        component: CommerViews, // 无限极菜单的容器
+        children: [
+          {
+            path: '/sanji1',
+            iconCls: 'fa fa-server',
+            name: routeNmae['menu3-1'],
+            component: Sanji,
+            children: []
+          },
+          {
+            path: '/sanji2',
+            iconCls: 'fa fa-server',
+            name: routeNmae['menu3-2'],
+            component: Sanji2,
+            children: []
+          },
+          {
+            path: '/sanji3',
+            iconCls: 'fa fa-server',
+            name: routeNmae['menu3-3'],
+            component: CommerViews,
+            children: [
+              {
+                path: '/siji',
+                iconCls: 'fa fa-server',
+                name: routeNmae['menu4-1'],
+                component: Siji,
+                children: []
+              },
+              {
+                path: '/siji1',
+                iconCls: 'fa fa-server',
+                name: routeNmae['menu4-2'],
+                component: CommerViews,
+                children: [
+                  {
+                    path: '/wuji',
+                    iconCls: 'fa fa-server',
+                    name: routeNmae['menu5-1'],
+                    component: Wuji,
+                    children: []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      } */
+    ]
+  },
 ]
 
 let addRouter = [
@@ -274,7 +474,7 @@ let addRouter = [
       } */
     ]
   },
-  {
+ /*  {
     path: '/',
     iconCls: 'fa fa-cloud-upload', // 图标样式class
     name: routeNmae.upload,
@@ -289,7 +489,7 @@ let addRouter = [
         children: []
       }
     ]
-  },
+  }, */
   // {
   //   path: '/',
   //   iconCls: 'el-icon-edit', // 图标样式class

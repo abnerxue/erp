@@ -6,14 +6,14 @@ import role from './modules/role'
 import layout from './modules/layout/index'
 
 Vue.use(Vuex)
-
+console.log(Cookies.get('JSESSIONID'));
 const store = new Vuex.Store({
   state: {
     // token: Cookies.get('token')
     token: Cookies.get('token')
   },
   mutations: {
-    setToken (state, token) {
+    /* setToken (state, token) {
     if(token==undefined){
       token=''
     }
@@ -22,11 +22,33 @@ const store = new Vuex.Store({
       // console.log(Cookie);
       Cookies.set('token', token ,{ expires: 1/24 });
       // Cookies.set('token', token ,{ expires: 1/24 });
-     }
+     }, */
+     setToken (state, token) {
+      if(token==undefined){
+        token=''
+      }
+      Cookies.set('token', token ,{ expires: 1/24 });
+        state.token = token
+      console.log(token);
+        // debugger;
+        // console.log(Cookie);
+        // Cookies.set('token', token ,{ expires: 1/24 });
+        // Cookies.set('token', token ,{ expires: 1/24 });
+       },
   },
   actions: {
     
+   /*  setToken ({commit}, token) {
+      return new Promise((resolve, reject) => {
+        if(token==undefined){
+          token=''
+        }
+        commit('setToken', token)
+        resolve()
+      })
+    } */
     setToken ({commit}, token) {
+      console.log(token);
       return new Promise((resolve, reject) => {
         if(token==undefined){
           token=''
