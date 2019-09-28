@@ -4,34 +4,53 @@
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input" style='float:right;width:30%;margin-bottom:.8rem;'>
-  </el-input> <br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="derive">导出</el-button> <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
+  </el-input> <br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button>  <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
       <el-dialog
   title="新增一卡通会员信息"
   :visible.sync="dialogVisible"
   width="30%"
   :before-close="handleClose">
  
- <el-form ref="form" :model="form" label-width="120px">
-  <el-form-item label="手机号">
+ <el-form ref="form" :model="form" :rules='rules' label-width="140px">
+  <el-form-item  label="手机号" prop="tel">
     <el-input v-model="form.tel"></el-input>
   </el-form-item>
-  <el-form-item label="一卡通号">
+  <el-form-item label="一卡通号" prop="cardn">
     <el-input v-model="form.cardn" style="width: 60%;"></el-input>
   </el-form-item>
-  <el-form-item label="购卡日期">
-   <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+  <el-form-item label="购卡日期" prop="date1">
+   <el-date-picker type="date" p
+   laceholder="选择日期" 
+   v-model="form.date1" 
+   value-format="yyyy-mm-dd"
+   style="width: 100%;"></el-date-picker>
   </el-form-item>
-  <el-form-item label="可买常孝通日期">
-   <el-date-picker type="date" placeholder="选择日期" v-model="form.date2" style="width: 100%;"></el-date-picker>
+  <el-form-item label="可买常孝通日期" prop="date2">
+   <el-date-picker type="date" 
+   placeholder="选择日期" 
+   v-model="form.date2" 
+   value-format="yyyy-MM-dd"
+   style="width: 100%;"></el-date-picker>
   </el-form-item>
-  <el-form-item label="金额">
+  <el-form-item label="金额" prop="money">
     <el-input v-model="form.money" style="width: 60%;"></el-input>
+    
   </el-form-item>
-  <el-form-item label="有效期">
-    <el-input v-model="form.yxq" style="width: 60%;"></el-input>
+  <el-form-item label="有效期" prop="yxq">
+    
+    <el-date-picker type="date" 
+   placeholder="选择日期" 
+   v-model="form.yxq" 
+   value-format="yyyy-MM-dd"
+   style="width: 100%;"></el-date-picker>
   </el-form-item>
   <el-form-item label="积分额度">
-    <el-input v-model="form.jfed" style="width: 60%;"></el-input>
+   
+    <el-select v-model="form.jfed" placeholder="输入积分额度">
+      <el-option label="" value="2"></el-option>
+      <el-option label="" value="3"></el-option>
+       <el-option label="" value="4"></el-option>
+    </el-select>
   </el-form-item>
   
   
@@ -68,7 +87,7 @@
           label="一卡通号">
         </el-table-column>
         <el-table-column
-          prop="ctime"
+          prop="(ctime||"").slice(0,9)"
           label="购卡日期"
           width="130">
         </el-table-column>
@@ -148,6 +167,30 @@ export default {
           yxq: '',
           jfed: ''
         },
+         rules: {
+          tel: [
+            { required: true,min: 11, max: 11, message: '请输入正确的手机号', trigger: 'blur' },
+           
+          ],
+          cardn: [
+            { type: '', required: true, message: '', trigger: 'change' }
+          ],
+          date1: [
+            {  type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            {  type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          money: [
+            {   type:'' ,required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          yxq: [
+            {   type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          jfed: [
+            { required: true, message: '请选择等级', trigger: 'blur' }
+          ]
+        },
         pagen:1,
          currentPage: 1, //初始页
       pagesize: 20, //    每页的数据
@@ -167,11 +210,11 @@ export default {
           let params = new URLSearchParams();
             params.append('cardno', this.form.cardn);
              params.append('money', this.form.money);
-              params.append('ctime', this.form.data1);
-             params.append('unlock', this.form.data2);
+              params.append('ctime', this.form.date1);
+             params.append('unlock', this.form.date2);
               params.append('score', this.form.jfed);
                params.append('drawday', this.form.yxq);
-                params.append('drawday', this.form.tel);
+                params.append('tel', this.form.tel);
              
      
              console.log(params)
@@ -193,7 +236,8 @@ export default {
           message: res.data.msg,
           type: "success"
         });
-          this.$router.push({path:'/hytable'})
+        this.getlist()
+          this.$router.push({path:'/cardtable'})
           }
 
      
@@ -202,6 +246,7 @@ export default {
            
         });
           this.dialogVisible = false
+          
         console.log('submit!');
       },
      handleSizeChange: function(size) {
