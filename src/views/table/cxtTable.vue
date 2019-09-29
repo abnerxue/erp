@@ -11,32 +11,34 @@
   :visible.sync="dialogVisible"
   width="30%"
   :before-close="handleClose">
- <el-form ref="form" :model="form" label-width="100px">
-  <el-form-item label="手机号">
-    <el-input v-model="form.tel"></el-input>
+ <el-form ref="form" :model="form" :rules='rules' label-width="100px">
+  <el-form-item label="手机号" prop="tel">
+    <el-input v-model="form.tel" ></el-input>
   </el-form-item>
-  <el-form-item label="常孝通数量">
+  <el-form-item label="常孝通数量" prop="cxtn">
     <el-input v-model="form.cxtn" style="width: 60%;"></el-input>
   </el-form-item>
-   <el-form-item label="购买日期">
+   <el-form-item label="购买日期" prop="date">
    <el-date-picker type="date" 
    placeholder="选择日期" 
    v-model="form.date"
-    :picker-options="pickerOptions" 
+   value-format="yyyy-MM-dd"
+  
     ></el-date-picker>
   </el-form-item>
-  <el-form-item label="解锁日期">
+  <el-form-item label="解锁日期" prop="date1">
    <el-date-picker
     type="date"
     placeholder="选择日期" 
-    v-model="form.date1" 
-    :picker-options="pickerOptions" 
+    v-model="form.date1"
+    value-format="yyyy-MM-dd" 
+   
     ></el-date-picker>
   </el-form-item>
  <!--  <el-form-item label="锁定期限">
     <el-input v-model="form.sdt" style="width: 60%;"></el-input>
   </el-form-item> -->
-  <el-form-item label="释放比例">
+  <el-form-item label="释放比例" prop="sfrate">
     <el-input v-model="form.sfrate" style="width: 60%;"></el-input>
   </el-form-item>
 
@@ -54,6 +56,7 @@
 </el-dialog>
       
       <el-table
+          v-loading="loading_status"
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
@@ -61,26 +64,27 @@
           @selection-change="handleSelectionChange">
         <el-table-column
             type="selection"
-            width="55">
+            width="50">
           </el-table-column>
         <el-table-column
           sortable
           prop="tel"
-          label="手机号">
+          label="手机号"
+          width="290">
         </el-table-column>
         <el-table-column
           prop="lock"
-          label="常孝通数量">
+          label="常孝通数量" width="290">
         </el-table-column>
         <el-table-column
           prop="stime"
           label="解锁日期"
-          width="130">
+          width="300">
         </el-table-column>
         
         <el-table-column
           prop="rate"
-          label="释放比例">
+          label="释放比例" width="270">
         </el-table-column>
        
         
@@ -102,30 +106,33 @@ export default {
   name: 'maintable',
   data () {
     return {
-       pickerOptions: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          },
-          shortcuts: [{
-            text: '今天',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: '昨天',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: '一周前',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
+      
+           rules: {
+          name: [
+            { required: true, min: 1, max: 20, message: '请输入正确的姓名', trigger: 'blur'},
+          
+          ],
+          tel: [
+            { required: true,  min: 10, max: 11,message: '请输入正确的电话号码', trigger: 'change' },
+             {
+           pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, message: '请输入正确的手机号' 
+        }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          sfrate: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          cxtn: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ]
         },
          form: {
            date:'',
@@ -152,6 +159,18 @@ export default {
      
       onSubmit() {
         let _this=this
+        let a=new Date(this.form.date).getTime()
+        console.log(a)
+         let b=new Date(this.form.date1).getTime()
+            console.log(b)
+       if(a>b){
+             this.$message({
+          showClose: true,
+          message: '解锁日期不能小于购买日期',
+          type: "error"
+        });
+        return
+       }
           let params = new URLSearchParams();
             params.append('rate', this.form.sfrate);
              params.append('lock', this.form.cxtn);
@@ -162,7 +181,7 @@ export default {
              console.log(params)
        this.list=[]
         //  _this.loading_status = true;
-      this.$ajax.post('/cxt//manager/cxt/in', params).then(res => {
+      this.$ajax.post('/cxt/manager/cxt/in', params).then(res => {
           if(res.data.state==='015'){
              _this.$router.push('/login');
           }else if(res.data.state!=='000'){
@@ -178,7 +197,8 @@ export default {
           message: res.data.msg,
           type: "success"
         });
-          this.$router.push({path:'/hytable'})
+        this.getlist()
+          this.$router.push({path:'/cxttable'})
           }
 
      
@@ -248,7 +268,7 @@ export default {
            
         });
      },
-       getlist(){
+       getlist(){ 
         let _this=this
           let params = new URLSearchParams();
             params.append('page', 1);
@@ -263,7 +283,7 @@ export default {
           }else{
             this.pagen=res.data.data.total
              console.log(res.data)
-           this.tableData=res.data.list
+           this.tableData=res.data.data.list
           
             console.log( this.tableData)
            

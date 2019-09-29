@@ -105,25 +105,28 @@ export default {
   },
   methods: {
     load() {
-      let data = {};
+     
 
       let _this = this;
 
       this.$ajax
-        .get("/cxt/manager/request", JSON.stringify(), {
-          //就是这里，
-          // headers: _this.Base.initAjaxHeader(1, data)
-        })
+        .get("/cxt/manager/request", {
+            headers: { 'Connection': 'Keep-Alive' },
+            withCredentials: true
+          })
         .then(res => {
           if (res.data.state === "000") {
+            console.log(document.cookie+ '+++++++++++++++');
+            //  _this.$router.push({ path: "/" });
             // 将 username 设置为 token 存储在 store，仅为测试效果，实际存储 token 以后台返回为准
             //  _this.$router.push({path: '/'})
-              localStorage.setItem("token", _this.loginForm.username);
-            _this.$store.dispatch("setToken", _this.loginForm.username).then(() => {
-              _this.$router.push({ path: "/" });
+              localStorage.setItem("token",1);
+              _this.$router.push({ path: "/index" });
+            _this.$store.dispatch("setToken",1).then(() => {
+              _this.$router.push({ path: "/index" });
             });
           } else {
-            alert;
+           
           }
         });
     },
@@ -180,13 +183,14 @@ export default {
                   that.$router.push({ path: "/index" });
                 })
                 .catch(res => {
-                  that.$message({
-                    showClose: true,
-                    message: res,
-                    type: "error"
-                  });
+                 
                 });
             } else {
+               that.$message({
+                    showClose: true,
+                    message: res.data.msg,
+                    type: "error"
+                  });
             }
 
             console.log(res.data.data);

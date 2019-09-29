@@ -1,21 +1,22 @@
 <template>
     <div>
     
-      <p class="title"><i class="el-icon-tickets"></i>常孝通会员信息 <el-input
+      <p class="title"><i class="el-icon-tickets"></i>会员信息录入 <el-input
     placeholder="请输入姓名或手机号进行查找"
     prefix-icon="el-icon-search"
     v-model="input" style='float:right;width:30%;margin-bottom:.8rem;'>
   </el-input><br/>    <el-button type="primary" style='margin:0 0 0 1rem;' @click="dialogVisible = true">新增</el-button>  <el-button type="primary" style='margin:0 0 0 1rem;' @click="getlist">刷新</el-button></p>
       <el-dialog
-  title="新增常孝通会员信息"
+  title="新增会员信息"
   :visible.sync="dialogVisible"
   width="30%"
   :before-close="handleClose">
- <el-form ref="form" :model="form" label-width="100px">
-     <el-form-item label="姓名">
+ <el-form ref="form" :model="form" 
+        :rules='rules' label-width="100px">
+     <el-form-item label="姓名" prop="name">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
-  <el-form-item label="手机号">
+  <el-form-item label="手机号" prop="tel">
     <el-input v-model="form.tel"></el-input>
   </el-form-item>
   <el-form-item label="上级手机号">
@@ -48,6 +49,7 @@
 </el-dialog>
       
       <el-table
+          v-loading="loading_status"
           ref="multipleTable"
           :data="tableData"
           tooltip-effect="dark"
@@ -103,6 +105,34 @@ export default {
          name: '',
        
           },
+           rules: {
+          name: [
+            { required: true, trigger: 'blur' },
+             {  }
+          ],
+          tel: [
+            { type: 'number', required: true,  trigger: 'change' },
+            {
+           pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, message: '请输入正确的手机号' 
+        }
+          ],
+          tel1: [
+            { type:'number', required: true,min: 10, max: 11, message: '请输入正确的手机号', trigger: 'change' },
+             {
+           pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, message: '请输入正确的手机号' 
+        }
+          ],
+          tel2: [
+            { type: 'number', required: true,min: 10, max: 11, message: '请输入正确的手机号', trigger: 'change' },
+             {
+           pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, message: '请输入正确的手机号' 
+        }
+          ],
+          region: [
+            { type: '', required: true, trigger: 'change' }
+          ],
+         
+        },
         dialogVisible: false,
       input:'',
       pagen:1,
@@ -129,8 +159,8 @@ export default {
               params.append('level', this.form.region);
      
              console.log(params)
-       this.list=[]
-        //  _this.loading_status = true;
+      
+     
       this.$ajax.post('/cxt/manager/user/info', params).then(res => {
           if(res.data.state==='015'){
              _this.$router.push('/login');
@@ -148,6 +178,7 @@ export default {
           type: "success"
         });
           this.$router.push({path:'/hytable'})
+           this.getlist()
           }
 
      
@@ -155,6 +186,8 @@ export default {
         
            
         });
+            // _this.loading_status = true;
+           
         this.dialogVisible = false
         console.log('submit!');
       },
