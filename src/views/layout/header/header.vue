@@ -10,7 +10,7 @@
         <li>
           <langSelect></langSelect>
         </li>
-        <li>{{rolelist.role}}</li>
+        <!-- <li>{{rolelist.role}}</li> -->
         <li>{{rolelist.tel}}</li>
         <li>
           <el-dropdown @command="handleCommand">

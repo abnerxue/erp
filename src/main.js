@@ -32,7 +32,16 @@ router.beforeEach((to, from, next) => {
   console.log(store.getters);
   
   localStorage.getItem("token");
+  console.log(localStorage.getItem("token"))
   // if (store.getters.token) {
+  /*   if (localStorage.getItem("token")===null) {
+      !async function getAddRouters () {
+       
+        console.log(store.getters.addRouters)
+       
+         next({path: '/index'})//刷新直接登录
+      }
+    } */
     if (localStorage.getItem("token")) {
   /*   store.dispatch('setToken', store.getters.token)
     if (to.path === '/login') {
@@ -40,6 +49,13 @@ router.beforeEach((to, from, next) => {
     } else { */
       // if (!store.getters.info.role) {
         // if (!Cookies) {
+         /*  if (localStorage.getItem("token")='') {
+           
+            !async function getAddRouters () {
+              
+               next({path: '/index'})//刷新直接登录
+            }
+          }  */
           if (!localStorage.getItem("token")) {
         // const role = ['/markdown', '/erji', '/erji2', '/siji', '/wuji']
         !async function getAddRouters () {
@@ -49,7 +65,7 @@ router.beforeEach((to, from, next) => {
           console.log(store.getters.addRouters)
           // await router.addRoutes(store.getters.addRouters)
            next({path: '/index'})//刷新直接登录
-        }()
+        }
       } else {
         let is404 = to.matched.some(record => {
           if(record.meta.role){

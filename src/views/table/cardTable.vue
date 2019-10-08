@@ -19,10 +19,10 @@
     <el-input v-model="form.cardn" style="width: 60%;"></el-input>
   </el-form-item>
   <el-form-item label="购卡日期" prop="date1">
-   <el-date-picker type="date" p
-   laceholder="选择日期" 
+   <el-date-picker type="date" 
+    placeholder="选择日期" 
    v-model="form.date1" 
-   value-format="yyyy-mm-dd"
+   value-format="yyyy-MM-dd"
    style="width: 100%;"></el-date-picker>
   </el-form-item>
   <el-form-item label="可买常孝通日期" prop="date2">
@@ -169,7 +169,10 @@ export default {
         },
          rules: {
           tel: [
-            { required: true,min: 11, max: 11, message: '请输入正确的手机号', trigger: 'blur' },
+            { required: true,min: 10, max: 11, message: '请输入正确的手机号', trigger: 'blur' },
+             {
+           pattern:/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/, message: '请输入正确的手机号' 
+        }
            
           ],
           cardn: [
@@ -207,6 +210,27 @@ export default {
   methods: {
     onSubmit() {
        let _this=this
+         let a=new Date(this.form.date1).getTime()
+        console.log(a)
+         let b=new Date(this.form.date2).getTime()
+            console.log(b)
+             let c=new Date(this.form.yxq).getTime()
+       if(a>b){
+             this.$message({
+          showClose: true,
+          message: '可买常孝通日期不能小于购卡日期',
+          type: "error"
+        });
+        return
+       }
+        if(a>c){
+             this.$message({
+          showClose: true,
+          message: '有效期不能小于购卡日期',
+          type: "error"
+        });
+        return
+       }
           let params = new URLSearchParams();
             params.append('cardno', this.form.cardn);
              params.append('money', this.form.money);
