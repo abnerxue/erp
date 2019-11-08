@@ -1,0 +1,158 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "怀南会",
+				"titleNView":false
+			}
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		},{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"navigationBarBackgroundColor": "#F8F8F8"
+			}
+		}, {
+			"path": "pages/goods/goods_category",
+			"style": {
+				"navigationBarTitleText": "商品分类"
+			}
+		}, {
+			"path": "pages/goods/goods_list",
+			"style": {
+				"navigationBarTitleText": "商品列表"
+			}
+		}, {
+			"path": "pages/goods/goods_detail",
+			"style": {
+				"titleNView":false
+			}
+		}, {
+			"path":"pages/goods/goods_comment",
+			"style":{
+				"navigationBarTitleText": "商品评论"
+			}
+		},{
+			"path": "pages/article/article",
+			"style": {
+				"navigationBarTitleText": "买家互动"
+			}
+		}, {
+			"path": "pages/article/article_list",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		}, {
+			"path": "pages/article/article_detail",
+			"style": {
+				"navigationBarTitleText": "文章"
+			}
+		}
+	    ,{
+            "path" : "pages/user/index",
+            "style" : {
+				"navigationBarTitleText": "用户中心"
+			}
+        },{
+            "path" : "pages/activity/activity",
+            "style" : {}
+        },{
+            "path" : "pages/activity/activity_detail",
+            "style" : {
+				"titleNView":false
+			}
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {
+            	"navigationBarTitleText": "登录"
+            }
+        }
+	    ,{
+			"path" : "pages/order/order",
+			"style" : {}
+		}
+	   ,{
+			"path" : "pages/address/address-list/address-list",
+			"style" : {}
+		}
+	   ,{
+			"path" : "pages/address/address-edit/address-edit",
+			"style" : {}
+		}
+	   ,{
+			"path" : "pages/setting/setting",
+			"style" : {}
+		}
+	   ,{
+			"path" : "pages/about/about",
+			"style" : {}
+		}
+	    ,{
+			"path" : "pages/pay/payment",
+			"style" : {}
+		}
+	   ,{
+			"path" : "pages/coupon/coupon",
+			"style" : {
+				"navigationBarTitleText": "优惠券"
+			}
+		}
+	   ,{
+			"path" : "pages/money/money",
+			"style" : {
+				"navigationBarTitleText": "余额"
+			}
+		}
+       ,{
+        "path" : "pages/score/score",
+        "style" : {
+          "navigationBarTitleText": "积分"
+        }
+      }
+
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "怀南会",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#929292",
+		"selectedColor": "#ff2244",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/ico/home.png",
+			"selectedIconPath": "static/ico/home_select.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/article/article",
+			"iconPath": "static/ico/baike.png",
+			"selectedIconPath": "static/ico/baike_select.png",
+			"text": "百科"
+		}, {
+			"pagePath": "pages/goods/goods_category",
+			"iconPath": "static/ico/category.png",
+			"selectedIconPath": "static/ico/category_select.png",
+			"text": "分类"
+		}, {
+			"pagePath": "pages/cart/cart",
+			"iconPath": "static/ico/cart.png",
+			"selectedIconPath": "static/ico/cart_select.png",
+			"text": "购物车"
+		}, {
+			"pagePath": "pages/user/index",
+			"iconPath": "static/ico/my.png",
+			"selectedIconPath": "static/ico/my_select.png",
+			"text": "我的"
+		}]
+	}
+}
