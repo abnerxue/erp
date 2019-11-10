@@ -42,6 +42,7 @@
 								<text>余额</text>
 							</view>
 						</view>
+						
 
 				</view>
 
@@ -61,6 +62,7 @@
 			<uni-list-item title="地址管理" @click="goAddress"></uni-list-item>
 			<uni-list-item title="设置" @click="goSetting"></uni-list-item>
 			<uni-list-item title="关于" @click="goAbout"></uni-list-item>
+			<uni-list-item title="test" @click="goAbout1"></uni-list-item>
 		</uni-list>
 	</view>
 </template>
@@ -106,6 +108,9 @@ export default {
 		},
 		goAbout() {
 			this.$jump('/pages/about/about');
+		},
+		goAbout1() {
+			this.$jump('/pages/about/tjr/tjr');
 		},
 		goDetail(e) {
 			uni.navigateTo({

@@ -6,7 +6,13 @@
 				"navigationBarTitleText": "怀南会",
 				"titleNView":false
 			}
-		}, {
+		}, 
+		{
+			"path": "pages/about/tjr/tjr",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},{
 			"path": "pages/search/search",
 			"style": {
 				"navigationBarTitleText": "搜索"
@@ -116,6 +122,10 @@
         }
       }
 
+        ,{
+            "path" : "pages/about/tjr/tjr",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
