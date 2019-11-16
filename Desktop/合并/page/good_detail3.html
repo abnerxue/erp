@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>限时秒杀</title>
+</head>
+<link rel="stylesheet" href="./css/foot.css">
+<link rel="stylesheet" href="./css/head.css">
+<link rel="stylesheet" href="./css/news.css">
+<style>
+    *{margin:0;padding:0;}
+    li{list-style:none }
+    img{vertical-align:top;border:none}
+    i{font-style: normal;}
+    a{text-decoration:none;outline: none;color: #8D8D8D;}
+    input[type=checkbox] {width:12px;height:12px;text-align: center;line-height:12px;}
+    input[type=checkbox]:after {width: 100%;height: 100%;top: 0px;content: " ";background-color:#74181B;color: white;display: inline-block;visibility: visible;border-radius: 2px;border:1px solid #74181B;}
+    .nav ul li:nth-child(8){color:rgb(116,24,27);}
+    input[type=checkbox]:checked:after {content: "\2713";/*UNICODE中对号*/font-size: 8px;font-weight:bold;}
+    /* 弹窗 */
+    #mask {position: absolute;top: 0;left: 0;width: 100%;height: 100%;min-width: 1200px;z-index: 999;background: #666;opacity: 0.5;display: none;}
+    .popup {position: absolute;left: 50%;width: 896px;height: 590px; background: #fff;z-index: 1000;border: 2px solid #74181b;display: none;}
+    .popup>div:nth-child(1){height: 53px;font-size: 16px;line-height: 53px;padding: 0 30px;box-sizing: border-box;background: #f5f5f5;}
+    .popup>div:nth-child(1) p{float: left;margin-right: 40px;cursor: pointer;}
+    .popup>div:nth-child(1) p:nth-child(1),.popup>div:nth-child(1) p:hover{color: #74181b;}
+    .btn_close {float:right;font-size: 20px;color: #74181b;background: #f5f5f5;height: 53px;} 
+    .bangle{padding: 30px 40px;box-sizing: border-box;}
+    .bangle img{width: 406px;height: 184px;box-sizing: border-box;border: 1px #c9c9c9 solid;float: left;margin-right: 40px;}
+    .bangle div:nth-child(1){overflow: hidden;margin-bottom: 40px;}
+    .bangle div:nth-child(1) p{float: left;font-size: 11px;line-height: 20px;color: #8d8d8d;width: 180px;}
+    .bangle div:nth-child(1) p:nth-child(1){color: #74181B;font-size: 14px;font-weight: 600;margin-bottom: 16px;width: 250px;}
+    .ring{padding: 30px 60px;box-sizing: border-box;width: 100%;display: none;}
+    .bangle div:nth-child(2){overflow: hidden;}
+    .bangle div:nth-child(2) div{float: left;width: 350px;}
+    .bangle div:nth-child(2) div p:nth-child(1){color: #74181B;font-size: 14px;font-weight: 600;margin-bottom: 12px;}
+    .bangle div:nth-child(2) div p{font-size: 12px;color: #8d8d8d;}
+    .bangle div:nth-child(2) div p:nth-child(2){color: #74181B;font-size: 12px;font-weight: 600;margin-bottom: 20px;}
+    /* 内容 */
+    .content{min-height: 600px;width: 1200px;margin: 0 auto;margin-bottom: 160px;overflow: hidden;}
+    .content-l{width: 100%;height: auto;float: left;overflow: hidden;}
+    .content-l p{font-size: 12px;margin-top: 20px;color: #8D8D8D;margin-bottom: 38px;}
+    button{border: 1px solid transparent;outline: none; }
+    .content-l p a:hover{color: #74171b;}
+    /* 轮播图 */
+    .g_top{width: 100%;height: auto;overflow: hidden;}
+    .gt_left{width: 486px;height: 584px;float: left;}
+    .gt_left>div:nth-child(1){width: 486px;height: 480px;background: firebrick;border: 1px #e9e9e9 solid;box-sizing: border-box;background-size:100% 100%;}
+    .gt_left>div:nth-child(2){margin-top: 24px;overflow: hidden;}
+    .gt_left>div:nth-child(2) p{width: 80px;height: 80px;border: 1px #e9e9e9 solid;float: left;margin-right: 8px;box-sizing: border-box;background-size: 100% 100%;background: brown;}
+    .gt_left>div:nth-child(2) p:last-child,.gt_left>div:nth-child(2) p:first-child{line-height: 80px;font-size: 20px;border: 0;width: 15px;color: #e9e9e9;margin-right: 0;background: #fff;}
+    .gt_left>div:nth-child(2) p:first-child,.gt_left>div:nth-child(2) p:nth-child(6){margin-right: 12px;}
+
+    /* 商品参数 */
+    .gt_right{padding: 8px 40px;float: left;padding-right: 0;}
+    .gt_right>p:first-child{font-size: 25px;font-weight: 600;}
+    .gt_right>span{color: #8D8D8D;font-size: 12px;margin-bottom: 20px;display: block;}
+    .seckill{height: 40px;margin-bottom: 20px;background: #DE0812;line-height: 40px;padding: 0 20px;color: #fff;}
+    .seckill p:nth-child(1){font-size: 18px;float: left;}
+    .seckill p:nth-child(1) i{background: url(./img/seckill.jpg) no-repeat;width: 20px;height: 20px;float: left;background-size: 100% 100%;margin-top: 10px;margin-right: 4px ;}
+    .seckill p:nth-child(2){font-size: 10px;float: right;}
+    .g_detail{height: 131px;width: 674px;background: #f5f5f5;padding: 5px 8px;box-sizing: border-box;}
+    .seckill p:nth-child(2) span{font-size: 14px;}
+    .g_detail p{line-height: 30px;height: 30px;}
+    .g_detail p span{font-size: 12px;color: #8D8D8D;}
+    .g_detail p span:nth-child(1){margin-right: 15px;}
+    .g_detail p:nth-child(1) span:nth-child(2){color: #DE0812;font-size: 18px;font-weight: 600;}
+    .g_detail p:nth-child(1) del{font-size: 8px;}
+    .g_detail p:nth-child(1) del i{font-size: 6px;}
+    .g_detail p:nth-child(1) span:nth-child(2) i{font-size: 12px;}
+    .g_detail p:nth-child(2) span:nth-child(2) i{color: #DE0812;font-size: 9px;border: 1px #DE0812 solid;padding: 0 2px;border-radius: 3px;margin-right: 8px;}
+    
+    /* 尺码 */
+    .g_size{height: 30px;padding: 0 8px;margin: 16px 0 20px 0;}
+    .g_size p{height: 30px;float: left;font-size: 12px;color: #8D8D8D;line-height: 30px;margin-right: 20px;}
+    .g_size p:nth-child(2){height: 30px;float: left;font-size: 12px;color: #8D8D8D;line-height: 30px;border: 1px #e9e9e9 solid;background: #f6f6f6;padding: 0 22px;border-radius: 5px;cursor: pointer;}
+
+    /* 数量 */
+    .g_number{height: 48px;line-height: 48px;padding: 0 8px;margin-bottom: 30px;}
+    .g_number p{font-size: 12px;color: #8D8D8D;float: left;}
+    .g_number p:nth-child(2){width: 162px;height:48px;border: 1px #e9e9e9 solid;box-sizing: border-box;margin: 0 16px 20px 16px;}
+    .g_number p:nth-child(2) span{float: left;text-align: center;font-size: 15px;height: 46px;width: 70px;border: 1px #e9e9e9 solid;border-top: 0;border-bottom: 0;box-sizing: border-box;}
+    .g_number p:nth-child(2) span:nth-child(1),.g_number p:nth-child(2) span:nth-child(3){width: 45px;border: 0;cursor: pointer;}
+
+    /* 购买 */
+    .g_buy span{font-size: 20px;color: #8D8D8D;}
+    .buy{width: 180px;height: 60px;background: #DE0812;color: #fff;font-size: 20px;border-radius: 5px;margin-right: 28px;}
+    .joincart{width: 180px;height: 60px;background: #74181b;color: #fff;font-size: 20px;border-radius: 5px;margin-right: 28px;}
+    .appraise{height: 25px;line-height: 25px;margin-top: 16px;}
+    .appraise span{color: #8D8D8D;font-size: 25px;}
+    .appraise span:nth-child(2){margin-left: 65px;font-size: 12px;}
+    .appraise span:nth-child(2) i{color: #DE0812;}
+
+    /* 广告 */
+    .g_ad{width: 100%;height: 150px;background: url(./img/good_ad.jpg) no-repeat;background-size: 100% 100%;margin: 40px 0;}
+
+    /* 商品导航栏 */
+    .g_left{width: 894px;height: auto;overflow: hidden;float: left;}
+    .g_nav{width:100%;height: 40px;line-height: 40px;padding: 0 10px;background: #f6f6f6;}
+    .g_nav li{margin: 0 30px;float: left;cursor: pointer;}
+    .g_nav li:hover,.g_nav li:nth-child(1){color:#74181b}
+    .g_right{width: 284px;float: right;height: auto;overflow: hidden;}
+    .g_right div{height: 40px;width: 100%;line-height: 40px;margin-bottom: 6px;}
+    .g_right div p:nth-child(1){float: left;line-height: 40px;font-size: 16px;font-weight: 600;}
+    .g_right div p:nth-child(2){float: right;font-size: 14px;color: #8D8D8D;}
+    .g_right div p:nth-child(2) i{width: 14px;height: 14px;background: url(./img/change.jpg);display: block;float: left;background-size: 100% 100%;margin-top: 13px;margin-right: 4px;}
+    .g_right ul li{font-weight: 282px;height: 430px;border: 1px #e9e9e9 solid;margin-bottom: 16px;}
+    .g_right ul li p:nth-child(1){width: 282px;height: 320px;background: url(./img/goods.jpg);background-size: 100% 100%;}
+    .g_right ul li p:nth-child(2){color: #8d8d8d;padding: 12px 5px;font-size: 14px;}
+    .g_right ul li p:nth-child(3){color: #DE0812;padding: 0 5px;font-size: 20px;}
+    .g_right ul li p:nth-child(3) span{color: #DE0812;font-size: 12px;}
+    .gn_detail{width: 894px;height: auto;overflow: hidden;margin-top: 18px;}
+
+    /* 商品参数  */
+    .gn_detail div:nth-child(1){width: 100%;height: 254px;background: #f5f5f5;padding: 0 24px;box-sizing: border-box;}
+    .gn_detail div:nth-child(1) p{height: 60px;line-height: 60px;border-bottom: 1px #e9e9e9 solid;font-size: 22px;padding: 0 16px;}
+    .gn_detail div:nth-child(1)>ul{padding: 33px 18px;overflow: hidden;width: 100%;box-sizing: border-box;}
+    .gn_detail div:nth-child(1)>ul li{width: 242px;float: left;line-height: 25px;font-size: 13px;color: #575757;}
+    .gn_detail div:nth-child(1)>ul li:nth-child(2n){width: 400px;float: left;}
+
+    /* 商品详情 */
+    .gn_pic{width: 100%;height: auto;padding: 0 24px;box-sizing: border-box;overflow: hidden;}
+    .gn_pic p{height: 90px;line-height: 90px;font-size: 22px;padding: 0 16px;}
+    .gn_pic div{width: 750px;height: auto;overflow: hidden;margin: 0 auto;}
+    .gn_pic div img{width: 750px;height: auto;overflow: hidden;background-size: 100% 100%;}
+
+    /* 报道 */
+    .report{width: 894px;height: 454px;background: #f4f4f4;margin-top: 90px;}
+    .report p{height: 80px;line-height: 80px;color: #74181b;font-size: 28px;text-align: center;font-weight: 600;position: relative;border-bottom: 1px #c9c9c9 solid;margin: 0 14px 25px 14px;}
+    .report p i:nth-child(1){position: absolute;top: 40px;left: 200px;width: 100px;height: 1px;background: #74181b;}
+    .report p i:nth-of-type(2){position: absolute;top: 40px;width: 100px;height: 1px;background: #74181b;right: 200px;}
+    .report>div{width: 100%;padding: 0 33px;}
+    .report>div img{width: 830px;height: 290px;margin: 0 auto;}
+
+    /* 购买方式 */
+    .gn_way{width: 894px;height: 400px;background: #f5f5f5;margin-top: 18px;padding: 0 24px;box-sizing: border-box;}
+    .gn_way>p{height: 60px;line-height: 60px;border-bottom: 1px #e9e9e9 solid;font-size: 22px;padding: 0 16px;}
+    .gn_way>div{padding: 28px 106px;width: 100%;overflow: hidden;box-sizing: border-box;position: relative;}
+    .gn_way>div>div{float: left;width: 220px;margin-right: 130px;margin-bottom: 20px;}
+    .gn_way>div>div:nth-child(2n){margin-right: 0;}
+    .gn_way>div>div p{font-size: 16px;height: 20px;line-height: 20px;color: #575757;position: relative;}
+    .gn_way>div>div p i{width: 23px;height: 23px;float: left;position: absolute;top: 0;left: -25px;background-size: 100% 100%;}
+    .gn_way>div>div span{font-size: 11px;color: #8d8d8d;}
+    .way_qr{position: absolute;top: 30px;right: 20px;}
+    .way_qr li{float: left;margin-right: 14px;}
+    .way_qr li>i{width: 50px;height: 50px;display: block;background: burlywood;}
+    .way_qr li span{color: rgb(201,201,201);font-size: 5px;display: block;line-height: 18px;text-align: center;}
+    .way_qr li span i{display: inline-block;width: 8px;height: 8px;background: url(./img/iphone.jpg) no-repeat;background-size: 100% 100%;margin-top: 1px;}
+    .way_qr li:nth-child(2) span i{background: url(./img/android.jpg) no-repeat;background-size: 100% 100%;}
+    /* 识玉轩 */
+    .gn_know{width: 894px;height: auto;overflow: hidden;}
+    .gn_know>div{width: 100%;height: 356px;background: #f5f5f5;margin-top: 40px;box-sizing: border-box;}
+    .gn_know>div:nth-child(1){margin-top: 18px;}
+    .gn_know>div>p{height: 60px;line-height: 60px;border-bottom: 1px #e9e9e9 solid;font-size: 22px;padding: 0 16px;margin: 0 24px;}
+    .know_d{width: 100%;padding: 30px  4px;height: auto;overflow: hidden;box-sizing: border-box;}
+    .know_d>div{float: left;width: 174px;height: 238px;background: #fff;margin-right: 4px;padding: 1px;box-sizing: border-box;}
+    .know_d>div:last-child{margin-right: 0;}
+    .know_d>div img{width: 172px;height: 80px;}
+    .know_d>div ul{height: auto;overflow: hidden;padding: 0 8px;}
+    .know_d>div ul li{line-height: 20px;font-size: 12px;color: #8d8d8d;}
+    .know_d>div ul li:nth-child(1){font-size: 16px;height: 16px;margin: 10px 0;color: rgb(63,51,51);font-weight: 600;}
+
+    /* 我们的保障 */
+    .gn_ensure{width: 894px;height: auto;overflow: hidden;}
+    .gn_ensure>div:nth-child(1){height: 468px;width: 100%;background: #f5f5f5;margin-top: 18px;box-sizing: border-box;}
+    .gn_ensure>div:nth-child(1)>p{height: 60px;line-height: 60px;border-bottom: 1px #e9e9e9 solid;font-size: 22px;padding: 0 16px;margin: 0 24px;}
+    .gn_ensure>div:nth-child(1)>div{margin-top: 30px;}
+    .gn_ensure>div:nth-child(1)>div img{width: 174px;height: 350px;box-sizing: border-box;display:block;float: left;margin-left: 4px;}
+    .gn_ensure>div:nth-child(2){width: 100%;height: 396px;background: #f5f5f5;margin-top: 30px;padding-left: 9px;padding-top: 30px;box-sizing: border-box;}
+    .gn_ensure>div:nth-child(2)>div{float: left;width: 435px;height: 160px;background: #fff;padding: 6px 5px;box-sizing: border-box;margin: 0 6px 16px 0;}
+    .gn_ensure>div:nth-child(2)>div img{box-sizing: border-box;display:block;float: left;width: 150px;height: 150px;margin-right: 20px;}
+    .gn_ensure>div:nth-child(2)>div p{float: left;width: 245px;font-size: 11px;color: rgb(63,51,51);margin-top: 12px;}
+    .gn_ensure>div:nth-child(2)>div p:nth-of-type(1){font-size: 16px;margin-top: 8px;font-weight: 600;}
+
+    /* 消费评价 */
+    .gn_evaluate{width: 894px;height: auto;overflow: hidden;}
+    .gn_evaluate>div:nth-child(1){height: 292px;width: 100%;background: #f5f5f5;margin-top: 18px;box-sizing: border-box;padding: 0 24px;}
+    .gn_evaluate>div:nth-child(1)>p{height: 60px;line-height: 60px;border-bottom: 1px #e9e9e9 solid;font-size: 22px;padding: 0 16px;}
+    .evaluate_box{height: auto;overflow: hidden;width: 100%;}
+    .evaluate_box ul{height: auto;overflow: hidden;width: 100%;padding: 35px 0;}
+    .evaluate_box ul>span{height: 88px;width: 1px;background: #c9c9c9;display: block;float: left;margin: 15px 0;}
+    .evaluate_box ul li{height: 130px;overflow: hidden;width: 250px;float: left;text-align: center;}
+    .evaluate_box ul li p:nth-child(1){font-size: 12px;color: #575757;margin-bottom: 16px;}
+    .evaluate_box ul li p:nth-child(2){font-size: 22px;color: #c9c9c9;;margin-bottom: 10px;}
+    .evaluate_box ul li p:nth-child(3){font-size: 20px;color: #575757;;}
+    .evaluate_box ul li p:nth-child(1) span{font-size: 32px;color: #DE0812;}
+    .evaluate_box ul li p:nth-child(3) span{color: #DE0812;}
+    .evaluate_box ul li:nth-of-type(3) p:nth-of-type(1){background: url(./img/gn_evaluate.jpg) no-repeat;width: 42px;height: 42px;background-size: 100% 100%;margin: 20px auto;}
+    .evaluate_box ul li:nth-of-type(3) p:nth-of-type(2){font-size: 15;color: #DE0812;}
+    .evaluate_box ul li:nth-of-type(2){padding-left:78px;width: 344px;box-sizing: border-box;}
+    .evaluate_box ul li:nth-of-type(2) div{height: 12px;font-size: 12px;margin-bottom: 14px;line-height: 12px;width: 190px;}
+    .evaluate_box ul li:nth-of-type(2) div span{float: left;}
+    .container {width: 120px;background-color: #ddd;height: 12px;float: left;margin: 0 12px;}
+    .skills {text-align: right;color: white;display: block;}
+    .html {width: 90%; background-color: #4CAF50;height: 100%;}
+    .ev_nav{height: 40px;margin-top: 8px;background: #f5f5f5;line-height: 40px;padding: 0 38px;}
+    .ev_nav p{float: left;margin-right: 32px;}
+    .ev_nav p:nth-of-type(1),.ev_nav p:hover{color: #74181b;}
+    .ev_nav p:nth-of-type(5):hover,.ev_nav p:nth-of-type(6):hover{color: #000000;}
+    .ev_nav input{margin-right: 5px;}
+    .ev_list li{width: 100%;height: auto;border-bottom: 1px #e9e9e9 solid;overflow: hidden;padding-top: 30px;padding-bottom: 20px;}
+    .ev_list li>p{float: left;}
+    .ev_list li>p:nth-child(1){padding: 0 25px;display: flex;flex-direction: column;float: left;}
+    .ev_list>li>p>img{width: 54px;height: 54px;}
+    .ev_list li>div{display: flex;flex-direction: column;overflow: hidden;float: left;width: 688px;}
+    .ev_list li>div p:nth-child(1){font-size: 18px;color: #DE0812;height: 18px;margin-bottom: 15px;line-height: 18px;}
+    .ev_list li>div p:nth-child(2){font-size: 12px;color: #8D8D8D;height: 12px;margin-bottom: 15px;line-height: 12px;}
+    .ev_list li>div p:last-child{font-size: 10px;color: #c9c9c9;line-height: 14px;height: 14px;}
+    .ev_list li>div p:last-child span{line-height: 14px;height: 14px;}
+    .ev_list li>div p:last-child span:nth-child(1){float: left;}
+    .ev_list li>div p:last-child span:nth-child(2){float: right;}
+    .ev_list li>div p:last-child span>i{background: url(./img/good.jpg) no-repeat;width: 12px;height: 12px;display: inline-block;}
+    .img_list,.img_plus{margin-bottom: 18px;}
+    .img_list img{width: 46px;height: 46px;border: 1px #c9c9c9 solid;cursor: -moz-zoom-in;cursor: -webkit-zoom-in;cursor: zoom-in;}
+    .img_plus img{width: 190px;height: 190px;cursor: -moz-zoom-out;cursor: -webkit-zoom-out;cursor: zoom-out;}
+</style> 
+<body>
+    <div class="head"> 
+        <div class="head-t">
+            <div class="top">
+                <ul>
+                    <li>欢迎来到怀南会</li>
+                    <li>0519-86888690</li>
+                    <li>客服在线时间9:00-23:00</li>
+                </ul>
+                <ul>
+                    <li>翡翠和田玉彩宝文玩零售批发平台</li>
+                    <li>手机版怀南会<span><i></i>会员中心</span></li>
+                    <li>请登录/免费注册</li>
+                </ul>
+            </div>
+        </div>
+        <div class="head-c">
+            <div id="logo">
+                <p>怀南会</p>
+                <span></span>
+            </div>
+            <div class="search">
+                <form action="/search" name="search_form" method="get" id="search_form">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="请输入您要搜索的关键词">
+                    <div class="btn" rel="search_btn">
+                        <div><span onclick="">搜索</span></div>
+                    </div>
+                </form>
+            </div>
+            <div class="qrcode"></div>
+        </div> 
+        <div class="nav">
+            <ul>
+                <li><i></i>所有商品分类</li>
+                <li>首页</li>
+                <li>新人专享</li>
+                <li>团购</li>
+                <li>秒杀</li>
+                <li>买家互动</li>
+                <li>积分商城</li>
+                <li>关于我们</li>
+                <li>百科资讯</li>
+                <li>商家入驻</li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-l">
+            <p>
+                <a>首页</a>
+                <i>></i>
+                <a>茶叶紫砂</a>
+                <i>></i>
+                <a>紫砂壶</a>
+            </p>
+        </div>
+        <div class="g_top">
+            <div class="gt_left">
+                <div>dddd</div>
+                <div>
+                    <p>&lt;</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p>&gt;</p>
+                </div>
+            </div>
+            <div class="gt_right">
+                <p>正宗宜兴菱花套组紫砂壶</p>
+                <span>商品货号：TH060</span>
+                <div class="seckill">
+                    <p><i></i>限时秒杀</p>
+                    <p>距该商品结束还剩：
+                        <span>09</span>时
+                        <span>09</span>分
+                        <span>09</span>秒
+                    </p>
+                </div>
+                <div class="g_detail">
+                    <p>
+                        <span>价格</span>
+                        <span><i>¥</i>2023.00</span>
+                        <del><i>¥</i>4040.00</del>
+                    </p>
+                    <p>
+                        <span>运费</span>
+                        <span><i>满免</i>满100.00元免运费</span>
+                    </p>
+                    <p>
+                        <span>配送</span>
+                        <span>预计1-3个工作日内发货</span>
+                    </p>
+                    <p>
+                        <span>服务</span>
+                        <span>支持七天无理由退换</span>
+                    </p>
+                </div>
+                <div class="g_size">
+                    <p>测量方法</p>
+                    <p>尺码表</p>
+                </div>
+                <div class="g_number">
+                    <p>数量</p>
+                    <p>
+                        <span class="reduce">-</span>
+                        <span class="num">1</span>
+                        <span class="plus">+</span>
+                    </p>
+                    <!-- <p>还剩<span class="surplus">100</span>份</p> -->
+                </div>
+                <div class="g_buy">
+                    <button class="buy">立即购买</button>
+                    <button class="joincart">加入购物车</button>
+                    <span>☆收藏</span>
+                </div>
+                <div class="appraise">
+                    <span>★☆☆☆☆</span>
+                    <span><i>0</i>人评价</span>
+                </div>
+            </div>
+        </div>
+        <div class="g_ad"></div>
+        <div class="g_left">
+            <ul class="g_nav">
+                <li>本单详情</li>
+                <li>识玉轩</li>
+                <li>消费评价（<span>99+</span>）</li>
+                <li>我们的保障</li>
+                <li>购买方式 </li>
+            </ul>
+            <div class="gn_detail">
+                <div>
+                    <p>商品参数</p>
+                    <ul>
+                        <li>
+                            商品名称：<span>菱花套组</span>
+                        </li>
+                        <li>
+                            商品规格 ：<span>壶身总长16.6cm&nbsp;口径6.4cm&nbsp;壶身总高8.4cm/小口杯总长6.3cm&nbsp;总高3.3cm</span>
+                        </li>
+                        <li>
+                            商品产地：<span>宜兴</span>
+                        </li>
+                        <li>
+                            商品货号：<span>TH060</span>
+                        </li>
+                        <li>
+                            用&nbsp;&nbsp;&nbsp;&nbsp;途：<span>办公&nbsp;家用</span>
+                        </li>
+                        <li>
+                            商品材质：<span>原矿紫泥</span>
+                        </li>
+                        <li>
+                            制作工艺：<span>手工</span>
+                        </li>
+                        <li>
+                            商品容量：<span>270cc&nbsp;小口杯50cc</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="gn_pic">
+                    <p>商品详情</p>
+                    <div>
+                        <img src="./img/gn_pic1.jpg" alt="">
+                        <img src="./img/gn_pic2.jpg" alt="">
+                        <img src="./img/gn_pic3.jpg" alt="">
+                        <img src="./img/gn_pic4.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="gn_know" style="display: none;">
+                <div>
+                    <p>翡翠透明度 </p>
+                    <div class="know_d">
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>冰玻种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p>翡翠的质地</p>
+                    <div class="know_d">
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>冰玻种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p>和田玉分类</p>
+                    <div class="know_d">
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>冰玻种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img src="./img/gn_know.jpg" alt="">
+                            <ul>
+                                <li>玻璃种</li>
+                                <li>特征：透明</li>
+                                <li>肉眼观测：反光观察 / 内部汇聚光较强<br>透光观察 / 多数光线可透过，内部特征清晰可见</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gn_evaluate" style="display: none;">
+                <div>
+                    <p>消费评价</p>
+                    <div class="evaluate_box">
+                        <ul>
+                            <li>
+                                <p><span>0</span>分</p>
+                                <p>★★★☆☆</p>
+                                <p>共<span>0</span>人评价</p>
+                            </li>
+                            <span></span>
+                            <li>
+                                <div>
+                                    <span>5分</span>
+                                    <p class="container">
+                                        <span class="skills html"></span>
+                                    </p>
+                                    <span>0人</span>
+                                </div>
+                                <div>
+                                    <span>5分</span>
+                                    <p class="container">
+                                        <span class="skills html"></span>
+                                    </p>
+                                    <span>0人</span>
+                                </div>
+                                <div>
+                                    <span>5分</span>
+                                    <p class="container">
+                                        <span class="skills html"></span>
+                                    </p>
+                                    <span>0人</span>
+                                </div>
+                                <div>
+                                    <span>5分</span>
+                                    <p class="container">
+                                        <span class="skills html"></span>
+                                    </p>
+                                    <span>0人</span>
+                                </div>
+                                <div>
+                                    <span>5分</span>
+                                    <p class="container">
+                                        <span class="skills html"></span>
+                                    </p>
+                                    <span>0人</span>
+                                </div>
+                            </li>
+                            <span></span>
+                            <li>
+                                <p></p>
+                                <p>我要评价</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ev_nav">
+                    <p>默认排序</p>
+                    <p>好评↓</p>
+                    <p>差评↓</p>
+                    <p>全部点评</p>
+                    <p><input type="checkbox" name="" id="">有图</p>
+                    <p><input type="checkbox" name="" id="">有内容的评价</p>
+                </div>
+                <ul class="ev_list">
+                    <li>
+                        <p>
+                            <img src="./img/head.jpg" alt="">
+                            <span>1*******5</span>
+                        </p>
+                        <div>
+                            <p>★★★☆☆ </p>
+                            <p>很不错，颜色很好看，质感很棒</p>
+                            <p class="img_list">
+                                <img src="./img/gn_ensure07.jpg" alt="">
+                                <img src="./img/gn_ensure08.jpg" alt="">
+                            </p>
+                            <p class="img_plus" style="display: none;">
+                                <img src="" alt="">
+                            </p>
+                            <p>
+                                <span>2019-10-26&nbsp;14:43</span>
+                                <span><i></i>20赞</span>
+                            </p> 
+                        </div>
+                    </li>
+                    <li>
+                        <p>
+                            <img src="./img/head.jpg" alt="">
+                            <span>1*******5</span>
+                        </p>
+                        <div>
+                            <p>★★★☆☆ </p>
+                            <p>很不错，颜色很好看，质感很棒</p>
+                            <p>
+                                <span>2019-10-26&nbsp;14:43</span>
+                                <span><i></i>20赞</span>
+                            </p> 
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="gn_ensure" style="display: none;">
+                <div>
+                    <p>我们的标准</p>
+                    <div>
+                        <img src="./img/gn_ensure01.jpg" alt="">
+                        <img src="./img/gn_ensure02.jpg" alt="">
+                        <img src="./img/gn_ensure03.jpg" alt="">
+                        <img src="./img/gn_ensure04.jpg" alt="">
+                        <img src="./img/gn_ensure05.jpg" alt="">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="./img/gn_ensure06.jpg" alt="">
+                        <p>关于图片</p>
+                        <p>怀南会的每一件玉石的图片都是实物多角度拍摄而成，但由于手机相机不能做到100%的色彩还原，且肉眼与手机的色彩还原也存在差异，所以图片与实物在感官上会存在细微差异，多年来我们和所有同行一样，一直努力将这个差异降到最低。</p>
+                    </div>
+                    <div>
+                        <img src="./img/gn_ensure07.jpg" alt="">
+                        <p>关于显示</p>
+                        <p>世界上没有完全相同的玉石，也没有完全相同显示效果的两台显示器，所以同一图片在不同显示器会有不同的显示效果。我们只能以我们的显示器显示作为描述标准，无法决定在您的显示器上看到的是同一效果，故整个交易最终只能以实物为准。</p>
+                    </div>
+                    <div>
+                        <img src="./img/gn_ensure08.jpg" alt="">
+                        <p>关于显示</p>
+                        <p>为了让消费者最清晰观察玉石细节，我们对部分图片做了放大处理(图片看起来比实物大)，我们所标注的尺寸误差不超过1毫米。</p>
+                    </div>
+                    <div>
+                        <img src="./img/gn_ensure09.jpg" alt="">
+                        <p>关于品质</p>
+                        <p>我们的玉石都是经过国家权威珠宝检测中心检测，怀南会所提供的每一件玉石都是天然的，我们在出售时都会附带国家权威检测机构出具的检测证书，欢迎任何形式的正规复检，愿承担一切法律责任。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gn_way" style="display: none;">
+                <p>购买方式</p>
+                <div>
+                    <div>
+                        <p><i style="background: url(./img/wechat.jpg) no-repeat;"></i>微信支付</p>
+                        <span>您在怀南会上看到心仪的宝贝后，可微信支付下单。</span>
+                    </div>
+                    <div>
+                        <p><i style="background: url(./img/phone.jpg) no-repeat;"></i>APP客户端购买</p>
+                        <span>下载APP随时随地挑选满意宝贝，联系APP内客服购买。</span>
+                    </div>
+                    <div>
+                        <p><i style="background: url(./img/zfb.jpg) no-repeat;"></i>支付宝支付</p>
+                        <span>您在怀南会上看到心仪的宝贝后，可在支付宝支付下单。</span>
+                    </div>
+                    <div>
+                        <p><i style="background: url(./img/listen.jpg) no-repeat;"></i>在线咨询购买</p>
+                        <span>选择满意宝贝后，点击页面右侧在线咨询客服，告知宝贝货号咨询购买。</span>
+                    </div>
+                    <div>
+                        <p><i style="background: url(./img/card.jpg) no-repeat;"></i>银行卡汇款/转账</p>
+                        <span>您在怀南会上看到心仪宝贝后，可银行卡汇款/转账支付下单。</span>
+                    </div>
+                    <div>
+                        <p><i style="background: url(./img/tel.jpg) no-repeat;"></i>电话订购</p>
+                        <span>您在怀南会上看到心仪的宝贝后，可电话联系下单。</span>
+                        <span>全国免费电话：<i>0519-86888690</i></span>
+                    </div>
+                    <ul class="way_qr">
+                        <li>
+                            <i></i>
+                            <span><i></i>iPhone</span>
+                        </li>
+                        <li>
+                            <i></i>
+                            <span><i></i>Android</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="report">
+                <p>
+                    <i></i>
+                    <span>千年古刹&nbsp;高僧加持</span>
+                    <i></i>
+                </p>
+                <div>
+                    <img src="./img/report.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="g_right">
+            <div>
+                <p>您可能喜欢的</p>
+                <p><i></i>换一批</p>
+            </div>
+            <ul>
+                <li>
+                    <p></p>
+                    <p>正宗宜兴紫砂壶原矿紫泥青蛙莲子花货花壶&nbsp;养生&nbsp;办公&nbsp;家用必备</p>
+                    <p><span>¥</span>85.00</p>
+                </li>
+                <li>
+                    <p></p>
+                    <p>正宗宜兴紫砂壶原矿紫泥青蛙莲子花货花壶&nbsp;养生&nbsp;办公&nbsp;家用必备</p>
+                    <p><span>¥</span>85.00</p>
+                </li>
+                <li>
+                    <p></p>
+                    <p>正宗宜兴紫砂壶原矿紫泥青蛙莲子花货花壶&nbsp;养生&nbsp;办公&nbsp;家用必备</p>
+                    <p><span>¥</span>85.00</p>
+                </li>
+                <li>
+                    <p></p>
+                    <p>正宗宜兴紫砂壶原矿紫泥青蛙莲子花货花壶&nbsp;养生&nbsp;办公&nbsp;家用必备</p>
+                    <p><span>¥</span>85.00</p>
+                </li>
+                <li>
+                    <p></p>
+                    <p>正宗宜兴紫砂壶原矿紫泥青蛙莲子花货花壶&nbsp;养生&nbsp;办公&nbsp;家用必备</p>
+                    <p><span>¥</span>85.00</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="news">
+        <div class="news_box">
+            <div class="new_l">
+                <div class="new_title">
+                    <p>媒体报道</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <p></p>
+                    <p>
+                        <span>中华孝道园入选《民族品牌之路》特别节目</span>
+                        <span>"社会诚信，国之根本"。2019年7月6日。常州孝道文化产业股份有限公司总裁温宁力女士受央......</span>
+                    </p>
+                    <div class="new_bottom">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="new_r">
+                <div class="new_title">
+                    <p>怀南会资讯</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <ul>
+                        <li>百科资讯</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>珠宝知识</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>问答</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot-t">
+            <ul>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>源头直供</span>
+                        <span>无中间商 确保低价</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>品质保障</span>
+                        <span>品质护航 购物无忧</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>七天无理由退换</span>
+                        <span>为您提供售后无忧保障</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>保价配送</span>
+                        <span>支持退换 安全便捷</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>质检监督</span>
+                        <span>正品保障 支持复检</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>实物拍摄</span>
+                        <span>相机拍摄 真实还原</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="foot-b">
+            <ul>
+                <li>关于我们</li>
+                <li>发展沿革</li>
+                <li>组织架构图</li>
+                <li>发展愿景</li>
+                <li>团队介绍</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>帮助中心</li>
+                <li>购买翡翠常遇问题</li>
+                <li>无忧退货</li>
+                <li>怀南会承诺</li>
+                <li>发票说明</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>支付方式</li>
+                <li>支付宝</li>
+                <li>微信支付</li>
+                <li>银行卡汇款/转账</li>
+            </ul>
+            <span></span>
+            <ul class="qr_phone">
+                <li>
+                    <i></i>
+                    <span><i></i>iPhone</span>
+                </li>
+                <li>
+                    <i></i>
+                    <span><i></i>Android</span>
+                </li>
+            </ul>
+        </div>
+        <div class="foot">
+            <p>电话：0519-86888690&nbsp;周一到周六&nbsp;09:00-22:00&nbsp;&nbsp;苏ICP备19046182号-1</p>
+            <p>版权所有©2016-2019&nbsp;常州怀南汇商务服务有限公司</p>
+        </div>
+    </div>
+    <div id="mask"></div>
+    <div class="popup">
+        <div>
+            <p class="bangle_t">手镯测量</p>
+            <p class="ring_t">戒指测量</p>
+            <button class="btn_close">x</button>
+        </div>
+        <div class="bangle">
+            <div>
+                <img src="./img/bangle1.jpg" alt="">
+                <div>
+                    <p>手掌最宽处：</p>
+                    <p>
+                        62-66mm&nbsp;戴内径50-52的圆镯<br>
+                        66-70mm&nbsp;戴内径52-54的圆镯<br>
+                        70-74mm&nbsp;戴内径54-56的圆镯<br>
+                        74-78mm&nbsp;戴内径56-58的圆镯<br>
+                        82cm以上&nbsp;戴内径61以上的圆镯<br>
+                        注:喜欢椭圆形贵妃玉镯的朋友需在所选内径中加大1-2毫米(mm)
+                    </p>
+                </div>
+            </div>
+            <div>
+                <img src="./img/bangle2.jpg" alt="">
+                <div>
+                    <p> (参照左图测量除大拇指之外的手掌尺寸)</p>
+                    <p>前提:人的左右手大小略有区别，所以您准备戴哪只手就以那只手的尺寸为标准。</p>
+                    <p>测量工具: (文具尺、 皮尺、游标尺均可)</p>
+                    <p>
+                        1.佩戴玉镯时间应选在清晨，因为这个时候手骨是一天当中最软的时候。<br>
+                        2.佩戴之前请使用诸如洗洁精之类的润滑剂先充分润滑手掌之后再戴进去。<br>
+                        3.年长者，骨节粗大情况者可在玉镯尺寸上加至1. -2毫米（mm）<br>
+                        4.喜欢佩戴宽松玉镯的朋友可以在基础上加大1-2毫米（mm），习惯佩戴小一点玉镯的朋友则可以在基础上减少1 -2毫米（mm）
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="ring">
+            <img src="./img/ring.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    // 增加、减少商品数量
+    $(".reduce").click(function(){
+		var num = $(this).next().text();
+		if(num<=1){
+			$(this).next().attr("disabled","disabled");
+		}else{
+			num--;
+            $(this).next().text(num);
+		}
+	});
+	$(".plus").click(function(){
+        var num = $(this).prev().text();
+        num++;
+        $(this).prev().text(num);
+    });
+    
+    var a = $(".gn_detail") //本单详情
+    var b = $(".gn_know") //识玉轩
+    var c = $(".gn_evaluate") //消费评价
+    var d = $(".gn_ensure") //我们的保障
+    var e = $(".gn_way") //购买方式
+    $(".g_nav li:nth-child(1)").click(function(){
+        a.show();
+        b.hide();
+        c.hide();
+        d.hide();
+        e.hide();
+        $(".report").show();
+        $(".g_nav li").css("color","#000");
+        $(".g_nav li:nth-child(1)").css("color","#74181b");
+    });
+    $(".g_nav li:nth-child(2)").click(function(){
+        a.hide();
+        b.show();
+        c.hide();
+        d.hide();
+        e.hide();
+        $(".report").hide();
+        $(".g_nav li").css("color","#000");
+        $(".g_nav li:nth-child(2)").css("color","#74181b");
+    });
+    $(".g_nav li:nth-child(3)").click(function(){
+        a.hide();
+        b.hide();
+        c.show();
+        d.hide();
+        e.hide();
+        $(".report").hide();
+        $(".g_nav li").css("color","#000");
+        $(".g_nav li:nth-child(3)").css("color","#74181b");
+    });
+    $(".g_nav li:nth-child(4)").click(function(){
+        a.hide();
+        b.hide();
+        c.hide();
+        d.show();
+        e.hide();
+        $(".report").hide();
+        $(".g_nav li").css("color","#000");
+        $(".g_nav li:nth-child(4)").css("color","#74181b");
+    });
+    $(".g_nav li:nth-child(5)").click(function(){
+        a.hide();
+        b.hide();
+        c.hide();
+        d.hide();
+        e.show();
+        $(".report").hide();
+        $(".g_nav li").css("color","#000");
+        $(".g_nav li:nth-child(5)").css("color","#74181b");
+    });
+    // 图片放大
+    $(".img_list img").click(function(){
+        $(".img_plus").show();
+        $(".img_plus img").attr('src',$(this)[0].src);
+    });
+    $(".img_plus img").click(function(){
+        $(".img_plus").hide();
+    })
+    //尺码表g_size
+    $('.g_size p:nth-child(2)').click(function() {
+        $('#mask').css({
+            display: 'block',
+            height: $(document).height()
+        })
+        var $Popup = $('.popup');
+        $Popup.css({
+            left: ($('body').width() - $Popup.width()) / 2+ 'px',
+            top: ($(window).height() - $Popup.height()) / 2 + $(window).scrollTop() + 'px',
+            display: 'block'
+        })
+    })
+    $('.btn_close').click(function() {
+        $('#mask,.popup').css('display', 'none');
+    })
+    $(".bangle_t").click(function(){
+        $(".bangle").show();
+        $(".ring").hide();
+        $(".bangle_t").css('color','#74181B');
+        $(".ring_t").css('color','#000');
+    })
+    $(".ring_t").click(function(){
+        $(".ring").show();
+        $(".bangle").hide();
+        $(".ring_t").css('color','#74181B');
+        $(".bangle_t").css('color','#000');
+    })
+</script>
+</html>

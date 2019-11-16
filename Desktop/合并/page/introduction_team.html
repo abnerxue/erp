@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于我们</title>
+</head>
+<link rel="stylesheet" href="./css/foot.css">
+<link rel="stylesheet" href="./css/head.css">
+<link rel="stylesheet" href="./css/news.css">
+<style>
+    *{margin:0;padding:0;}
+    li{list-style:none }
+    img{vertical-align:top;border:none}
+    a {text-decoration:none;outline: none;color: #000;}
+    a:hover{color: #74171b;}
+    .nav ul li:nth-child(8){color:rgb(116,24,27);}
+    /* 内容 */
+    .content{min-width: 1200px;width: 100%;background: #f5f5f5;overflow: hidden;}
+    .content_box{min-height: 600px;width: 1200px;margin: 0 auto;overflow: hidden;}
+    .content-l{width: 220px;height: auto;float: left;overflow: hidden;}
+    .content-l p a:hover{color: #74171b;}
+    .content-l p{font-size: 12px;margin-top: 20px;color: #8D8D8D;margin-bottom: 38px;}
+    .content-l ul{width:100%;margin-left: 40px;}
+    .content-l ul li{height:30px;font-size: 14px;color: rgb(86,86,86);}
+    .content-l ul li:nth-child(1){color:rgb(116,24,27);}
+    .content-r{float:left;margin-top:70px;width:902px;color: #000;}
+    .content-r>div:nth-child(1){height: 40px;box-sizing: border-box;border-bottom: 2px #efefef solid;}
+    .content-r>div:nth-child(1) a{height: 40px;float: left;font-size: 14px;padding: 0 10px;line-height: 40px;}
+    .content-r ul{height: 45px;overflow: hidden;display: flex;flex-direction: row;justify-content: flex-end;}
+    .content-r ul li{height: 45px;line-height: 45px;font-size: 12px;padding: 0 10px;color: #8D8D8D;}
+    .business_card{overflow: hidden;width: 100%;display: flex;flex-direction: row;flex-wrap: wrap;}
+    .business_card>div{width: 295px;overflow: hidden;position: relative;padding-top: 42px;margin-top: 24px;box-sizing: border-box;margin-right: 8px;margin-bottom: 40px;}
+    .business_card>div:nth-child(3n){margin-right: 0;}
+    .business_card>div img{width: 85px;height: 85px;border-radius: 50%;position: absolute;top: 0;left: 108px;}
+    .business_card>div>div{overflow: hidden;width: 100%;background: #fff;border-radius: 5px;padding-top: 59px;box-sizing: border-box;}
+    .business_card>div>div h1{text-align: center;font-size: 15px;height: 15px;line-height: 15px;}
+    .business_card>div>div h5{font-size: 10px;height: 10px;line-height: 10px;margin-top: 9px;text-align: center;margin-bottom: 14px;}
+    .text_box{overflow: hidden;padding: 0 32px;}
+    .c_text{overflow: hidden;font-size: 11px;}
+    .text_box span:nth-of-type(1){background: #e9e9e9;margin: 10px 0px;display: block;height: 1px;}
+    .open_text i{background: url(./img/arrow_b1.jpg) no-repeat;width: 9px;height: 5px;display: inline-block;background-size: 100% 100%;}
+    .open_text{display: block;  color: #8D8D8D;font-size: 10px;text-align: center;cursor: pointer;margin-bottom: 14px;}
+    .open_text .top{background: url(./img/arrow_t.jpg) no-repeat;}
+</style> 
+<body>
+    <div class="head"> 
+        <div class="head-t">
+            <div class="top">
+                <ul>
+                    <li>欢迎来到怀南会</li>
+                    <li>0519-86888690</li>
+                    <li>客服在线时间9:00-23:00</li>
+                </ul>
+                <ul>
+                    <li>翡翠和田玉彩宝文玩零售批发平台</li>
+                    <li>手机版怀南会<span><i></i>会员中心</span></li>
+                    <li>请登录/免费注册</li>
+                </ul>
+            </div>
+        </div>
+        <div class="head-c">
+            <div id="logo">
+                <p>怀南会</p>
+                <span></span>
+            </div>
+            <div class="search">
+                <form action="/search" name="search_form" method="get" id="search_form">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="请输入您要搜索的关键词">
+                    <div class="btn" rel="search_btn">
+                        <div><span onclick="">搜索</span></div>
+                    </div>
+                </form>
+            </div>
+            <div class="qrcode"></div>
+        </div> 
+        <div class="nav">
+            <ul>
+                <li><i></i>所有商品分类</li>
+                <li>首页</li>
+                <li>新人专享</li>
+                <li>团购</li>
+                <li>秒杀</li>
+                <li>买家互动</li>
+                <li>积分商城</li>
+                <li>关于我们</li>
+                <li>百科资讯</li>
+                <li>商家入驻</li>
+            </ul>
+        </div>
+    </div> 
+    <div class="content">
+        <div class="content_box">
+            <div class="content-l">
+                <p>
+                    <a>首页</a>
+                    <i>></i>
+                    <a>关于我们</a>
+                </p>
+                <ul>
+                    <li>关于我们</li>
+                    <li>集团介绍</li>
+                    <li>怀南会介绍</li>
+                    <li>发展沿革</li>
+                    <li>组织架构图</li>
+                    <li>发展愿景</li>
+                    <li>团队介绍</li>
+                    <li>企业文化</li>
+                    <li>怀南会组织构架图</li>
+                </ul>
+            </div>
+            <div class='content-r'>
+                <div>
+                    <a href="javascript:;">常孝股份集团高管团队</a>
+                    <a href="javascript:;">常孝股份集团子公司高管团队</a>
+                </div> 
+                <ul>
+                    <li><a href="javascript:;">中华孝道园</a></li>
+                    <li><a href="javascript:;">怀南会</a></li>
+                    <li><a href="javascript:;">常州孝行文化传播有限公司</a></li>
+                    <li><a href="javascript:;">南京分公司</a></li>
+                    <li><a href="javascript:;">无锡分公司</a></li>
+                    <li><a href="javascript:;">常州分公司</a></li>
+                    <li><a href="javascript:;">嘉兴分公司</a></li>
+                </ul>
+                <div class="business_card">
+                    <div>
+                        <img src="./img/head.jpg" alt="">
+                        <div>
+                            <h1>蒋建明</h1>
+                            <h5>董事长</h5>
+                            <div class="text_box">
+                                <p class="c_text">中共党员，经济师。“常孝股份”和中华孝道园的创始人。中华孝道园董事长，“常孝股份” 董事局主席，国家华夏文化纽带工程组委会执委会常委，常州市孔子思想研究会会长，常州大学中华孝道文化研究院理事长、研究员，常州市姓氏文化研究会名誉会长，常州市地方文化研究会名誉会长。曾任龙宇商业集团公司总经理，任武进太湖旅游度假区专职副主任。有着多年成功的企业管理和经营经验，又有着多年当地旅游业发展规划和管理的经验。在公司主要负责公司战略发展规划和风险管理工作，并主持董事局日常工作。</p>
+                                <span></span>
+                                <div class="open_text">展开<i></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./img/head.jpg" alt="">
+                        <div>
+                            <h1>蒋建明</h1>
+                            <h5>董事长</h5>
+                            <div class="text_box">
+                                <p class="c_text">中共党员，经济师。“常孝股份”和中华孝道园的创始人。中华孝道园董事长，“常孝股份” 董事局主席，国家华夏文化纽带工程组委会执委会常委，常州市孔子思想研究会会长，常州大学中华孝道文化研究院理事长、研究员，常州市姓氏文化研究会名誉会长，常州市地方文化研究会名誉会长。曾任龙宇商业集团公司总经理，任武进太湖旅游度假区专职副主任。有着多年成功的企业管理和经营经验，又有着多年当地旅游业发展规划和管理的经验。在公司主要负责公司战略发展规划和风险管理工作，并主持董事局日常工作。</p>
+                                <span></span>
+                                <div class="open_text">展开<i></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./img/head.jpg" alt="">
+                        <div>
+                            <h1>蒋建明</h1>
+                            <h5>董事长</h5>
+                            <div class="text_box">
+                                <p class="c_text">中共党员，经济师。“常孝股份”和中华孝道园的创始人。中华孝道园董事长，“常孝股份” 董事局主席，国家华夏文化纽带工程组委会执委会常委，常州市孔子思想研究会会长，常州大学中华孝道文化研究院理事长、研究员，常州市姓氏文化研究会名誉会长，常州市地方文化研究会名誉会长。一次自己在家门口用滴滴打车叫了一辆顺风车，刚下单就有两个师傅抢单，结果最后打电话确认时，那位抢单的师傅却告诉他，自己还在几十公里之外的弓村。  先生说，能因为经验不足，有些司机“隔着一座山也要接单”，没有限制地乱抢单却无法及时到达，耽误的是消费者的时间精力。另一位居民陈小姐吐槽的则是许多顺风车师傅的认路能力。“五次中有三次，都是顺风车师傅走错路或是绕了很大一个曾任龙宇商业集团公司总经理，任武进太湖旅游度假区专职副主任。有着多年成功的企业管理和经营经验，又有着多年当地旅游业发展规划和管理的经验。在公司主要负责公司战略发展规划和风险管理工作，并主持董事局日常工作。</p>
+                                <span></span>
+                                <div class="open_text">展开<i></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./img/head.jpg" alt="">
+                        <div>
+                            <h1>蒋建明</h1>
+                            <h5>董事长</h5>
+                            <div class="text_box">
+                                <p class="c_text">一次自己在家门口用滴滴打车叫了一辆顺风车，刚下单就有两个师傅抢单，结果最后打电话确认时，那位抢单的师傅却告诉他，自己还在几十公里之外的弓村。  先生说，能因为经验不足，有些司机“隔着一座山也要接单”，没有限制地乱抢单却无法及时到达，耽误的是消费者的时间精力。另一位居民陈小姐吐槽的则是许多顺风车师傅的认路能力。“五次中有三次，都是顺风车师傅走错路或是绕了很大一个</p>
+                                <span></span>
+                                <div class="open_text">展开<i></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="news">
+        <div class="news_box">
+            <div class="new_l">
+                <div class="new_title">
+                    <p>媒体报道</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <p></p>
+                    <p>
+                        <span>中华孝道园入选《民族品牌之路》特别节目</span>
+                        <span>"社会诚信，国之根本"。2019年7月6日。常州孝道文化产业股份有限公司总裁温宁力女士受央......</span>
+                    </p>
+                    <div class="new_bottom">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="new_r">
+                <div class="new_title">
+                    <p>怀南会资讯</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <ul>
+                        <li>百科资讯</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>珠宝知识</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>问答</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot-t">
+            <ul>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>源头直供</span>
+                        <span>无中间商 确保低价</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>品质保障</span>
+                        <span>品质护航 购物无忧</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>七天无理由退换</span>
+                        <span>为您提供售后无忧保障</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>保价配送</span>
+                        <span>支持退换 安全便捷</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>质检监督</span>
+                        <span>正品保障 支持复检</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>实物拍摄</span>
+                        <span>相机拍摄 真实还原</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="foot-b">
+            <ul>
+                <li>关于我们</li>
+                <li>发展沿革</li>
+                <li>组织架构图</li>
+                <li>发展愿景</li>
+                <li>团队介绍</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>帮助中心</li>
+                <li>购买翡翠常遇问题</li>
+                <li>无忧退货</li>
+                <li>怀南会承诺</li>
+                <li>发票说明</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>支付方式</li>
+                <li>支付宝</li>
+                <li>微信支付</li>
+                <li>银行卡汇款/转账</li>
+            </ul>
+            <span></span>
+            <ul class="qr_phone">
+                <li>
+                    <i></i>
+                    <span><i></i>iPhone</span>
+                </li>
+                <li>
+                    <i></i>
+                    <span><i></i>Android</span>
+                </li>
+            </ul>
+        </div>
+        <div class="foot">
+            <p>电话：0519-86888690&nbsp;周一到周六&nbsp;09:00-22:00&nbsp;&nbsp;苏ICP备19046182号-1</p>
+            <p>版权所有©2016-2019&nbsp;常州怀南汇商务服务有限公司</p>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var initFontNum = 103;    //初始化字数限制
+    var initTextHeight = 75; // 初始化高度px
+    var ctext = $(".c_text");
+    $(".c_text").each(function(i){
+        var didiText = $(this).text(); //获取完整内容
+        var didiHeight = $(this).height(); //获取完整内容时容器高度
+        if(didiText.length >= initFontNum && didiHeight > initTextHeight){
+            $(this).text($(this).text().substring(0,initFontNum)); //将内容截取到限制长度
+            $(this).html($(this).html()+'......'); //截取后的内容以省略号结尾
+            $('.text_box').css({  //显示最外层容器
+                'opacity' : '1'
+            });
+            $(this).css({ 
+                'height':initTextHeight + 'px',
+            });
+            $(this).next().next().click(function(){
+                var curText = ctext.eq(i).text(); //截取后的内容
+                if(curText.length == 109){
+                    ctext.eq(i).css({
+                        'height' : didiHeight + 'px' ,
+                        '-moz-transition' : '0.6s',
+                        '-webkit-transition' : '0.6s',
+                        'transition' : '0.6s'
+                    });
+                    $(this).html('收起<i class="top"></i>');
+                    // $(btn).text('收起');
+                    ctext.eq(i).text(didiText); 
+                }else{
+                    ctext.eq(i).css({
+                        'height': initTextHeight + 'px',
+                        '-moz-transition' : '0.6s',
+                        '-webkit-transition' : '0.6s',
+                        'transition' : '0.6s'
+                    });
+                    // $(btn).text('展开');
+                    $(this).html('展开<i></i>');
+                    setTimeout(function(){
+                        ctext.eq(i).text(ctext.eq(i).text().substring(0,initFontNum));
+                        ctext.eq(i).html(ctext.eq(i).html()+'......');
+                    },500)
+                }
+                return false;
+            })
+        }
+    })
+    
+    
+</script>
+</html>

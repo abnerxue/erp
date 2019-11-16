@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>积分商城</title>
+</head>
+<link rel="stylesheet" href="./css/foot.css">
+<link rel="stylesheet" href="./css/head.css">
+<link rel="stylesheet" href="./css/news.css">
+<style>
+    *{margin:0;padding:0;}
+    li{list-style:none }
+    img{vertical-align:top;border:none}
+    a{text-decoration:none;outline: none;color: #8D8D8D;}
+    i{font-style: normal;}
+    input{outline: 0;border: 0;}
+    input[type=number] {-moz-appearance:textfield;}
+    input[type=number]::-webkit-inner-spin-button,  input[type=number]::-webkit-outer-spin-button{-webkit-appearance: none;}
+    .nav ul li:nth-child(7){color:rgb(116,24,27);}
+    /* 内容 */
+    .content{min-height: 600px;width: 100%;background: #f5f5f5;}
+    .content_box{width: 1200px;margin: 0 auto;}
+    .content-l{width: 100%;height: auto;overflow: hidden;}
+    .content-l p{font-size: 12px;margin-top: 20px;color: #8D8D8D;margin-bottom: 24px;}
+    .content-l p a:hover{color: #74171b;}
+    
+    
+    /* 物品列表 */
+    .goods_list{width: 100%;height: auto;margin-bottom: 104px;overflow: hidden;}
+    .goods_list li{width: 282px;height: 396px;margin: 0 24px 17px 0;box-sizing: border-box;float: left;background: #fff;}
+    .goods_list li:nth-child(4n){margin-right: 0;}
+    .goods_list li>p:nth-child(1){width: 282px;height: 282px;background: coral;background-size: 100% 100%;}
+    .goods_list li>p:nth-child(2){font-size: 12px;color: rgb(18,4,4);margin: 10px;height: 12px;}
+    .exchange{height: 32px;padding: 10px;display: flex;flex-direction: row;justify-content: space-between;}
+    .exchange p:nth-child(1){color: rgb(86,86,86);font-size: 12px;}
+    .exchange p span{color: #DE0812;font-size: 20px;}
+    .exchange p:nth-child(2){width: 80px;height: 32px;border: 1px #DE0812 solid;font-size: 14px;color: #DE0812;line-height: 30px;box-sizing: border-box;text-align: center;border-radius: 50px;cursor: pointer;}
+    .exchange p:nth-child(2):hover{background: #DE0812;color: #fff;}
+    /* 页码 */
+    .pages{display: flex;flex-direction: row;justify-content: center;padding-bottom: 120px;}
+    .pages p{width:33px;height:33px;border: 1px #e9e9e9 solid;line-height: 33px;text-align: center;margin-right: 4px;color: rgb(121,121,121);float: left;background: #fff;}
+    .pages p:nth-child(2),.pages p:hover{background: rgb(116,24,27);color: white;}
+    .pages p:last-child{margin: 0;width: 58px;}
+</style>
+<body>
+    <div class="head"> 
+        <div class="head-t">
+            <div class="top">
+                <ul>
+                    <li>欢迎来到怀南会</li>
+                    <li>0519-86888690</li>
+                    <li>客服在线时间9:00-23:00</li>
+                </ul>
+                <ul>
+                    <li>翡翠和田玉彩宝文玩零售批发平台</li>
+                    <li>手机版怀南会<span><i></i>会员中心</span></li>
+                    <li>请登录/免费注册</li>
+                </ul>
+            </div>
+        </div>
+        <div class="head-c">
+            <div id="logo">
+                <p>怀南会</p>
+                <span></span>
+            </div>
+            <div class="search">
+                <form action="/search" name="search_form" method="get" id="search_form">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="请输入您要搜索的关键词">
+                    <div class="btn" rel="search_btn">
+                        <div><span onclick="">搜索</span></div>
+                    </div>
+                </form>
+            </div>
+            <div class="qrcode"></div>
+        </div> 
+        <div class="nav">
+            <ul>
+                <li><i></i>所有商品分类</li>
+                <li>首页</li>
+                <li>新人专享</li>
+                <li>团购</li>
+                <li>秒杀</li>
+                <li>买家互动</li>
+                <li>积分商城</li>
+                <li>关于我们</li>
+                <li>百科资讯</li>
+                <li>商家入驻</li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content_box">
+            <div class="content-l">
+                <p>
+                    <a>首页</a>
+                    <i>></i>
+                    <a>积分商城</a>
+                </p>
+            </div>
+            <ul class="goods_list">
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+                <li>
+                    <p>图片</p>
+                    <p>精美金不换小墨条文房四宝</p>
+                    <div class="exchange">
+                        <p><span>1000</span>积分</p>
+                        <p>去兑换 </p>
+                    </div>
+                </li>
+            </ul>
+            <div class="pages">
+                <p>&lt;</p>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>&gt;</p>
+                <p>尾页</p>
+            </div>
+        </div>
+    </div>
+    <div class="news"> 
+        <div class="news_box">
+            <div class="new_l">
+                <div class="new_title">
+                    <p>媒体报道</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <p></p>
+                    <p>
+                        <span>中华孝道园入选《民族品牌之路》特别节目</span>
+                        <span>"社会诚信，国之根本"。2019年7月6日。常州孝道文化产业股份有限公司总裁温宁力女士受央......</span>
+                    </p>
+                    <div class="new_bottom">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="new_r">
+                <div class="new_title">
+                    <p>怀南会资讯</p>
+                    <p>更多> </p>
+                </div>
+                <div class="new_content">
+                    <ul>
+                        <li>百科资讯</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>珠宝知识</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                    <ul>
+                        <li>问答</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                        <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot-t">
+            <ul>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>源头直供</span>
+                        <span>无中间商 确保低价</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>品质保障</span>
+                        <span>品质护航 购物无忧</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>七天无理由退换</span>
+                        <span>为您提供售后无忧保障</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>保价配送</span>
+                        <span>支持退换 安全便捷</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>质检监督</span>
+                        <span>正品保障 支持复检</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>实物拍摄</span>
+                        <span>相机拍摄 真实还原</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="foot-b">
+            <ul>
+                <li>关于我们</li>
+                <li>发展沿革</li>
+                <li>组织架构图</li>
+                <li>发展愿景</li>
+                <li>团队介绍</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>帮助中心</li>
+                <li>购买翡翠常遇问题</li>
+                <li>无忧退货</li>
+                <li>怀南会承诺</li>
+                <li>发票说明</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>支付方式</li>
+                <li>支付宝</li>
+                <li>微信支付</li>
+                <li>银行卡汇款/转账</li>
+            </ul>
+            <span></span>
+            <ul class="qr_phone">
+                <li>
+                    <i></i>
+                    <span><i></i>iPhone</span>
+                </li>
+                <li>
+                    <i></i>
+                    <span><i></i>Android</span>
+                </li>
+            </ul>
+        </div>
+        <div class="foot">
+            <p>电话：0519-86888690&nbsp;周一到周六&nbsp;09:00-22:00&nbsp;&nbsp;苏ICP备19046182号-1</p>
+            <p>版权所有©2016-2019&nbsp;常州怀南汇商务服务有限公司</p>
+        </div>
+    </div>
+</body>
+<script>
+</script>
+</html>

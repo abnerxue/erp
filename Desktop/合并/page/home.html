@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>首页</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="./css/foot.css">
+<link rel="stylesheet" href="./css/head.css">
+<link rel="stylesheet" href="./css/news.css">
+<!-- <link rel="stylesheet" href="js/layer-v3.1.1/layer/mobile/need/layer.css"> -->
+<style>
+    *{margin:0;padding:0;}
+    li{list-style:none }
+    img{vertical-align:top;border:none}
+    i{font-style: normal;}
+    input{outline: 0;border: 0;}
+    input[type=number] {-moz-appearance:textfield;}
+    input[type=number]::-webkit-inner-spin-button,  input[type=number]::-webkit-outer-spin-button{-webkit-appearance: none;}
+    /* 内容 */
+    .layui-carousel>[carousel-item]{width: 1920px;}
+    .layui-carousel{width:1920px;}
+    .content{min-height: 600px;width: 1200px;margin: 0 auto;}
+    /* .content ul :nth-child(2){float:right;} */
+    /* .content ul :nth-child(2) li{float:right;} */
+    .content-l{width: 100%;height: auto;overflow: hidden;}
+    .content-l p{font-size: 12px;margin-top: 20px;color: #8D8D8D;margin-bottom: 24px;}
+    /* 排序 */
+    .content_c{height: 40px;background: #f5f5f5;padding: 0 16px;line-height: 40px;font-size:12px;margin-top:20px;}
+    .content_c>p{float: left;margin-right: 32px;color: #8d8d8d;cursor: pointer;}
+    .content_c>p:nth-child(1){color:rgb(116,24,27);font-size: 25px;}
+    
+    .content_c p:last-child{float:right;}
+    .price{height: 40px;float: left;display: flex;flex-direction: row;}
+    .price_{height: 40px;float: left;display: flex;flex-direction: row;margin-left:5%;}
+    .price_ p:nth-child(1),.price_ p:nth-child(3){width: 50px;height: 20px;border: 1px #e9e9e9 solid;background: #fff;padding: 0 1px;box-sizing: border-box;display: block;margin-top: 10px;}
+    .price_ p:nth-child(2){font-size: 10px;margin: 0 2px;color: #8d8d8d;}
+    .price_ p span{float: left;height: 18px;line-height: 18px;font-size: 10px;color: #8d8d8d;margin: 0 2px;}
+    .price_ p input{width: 32px;padding: 0 2px;box-sizing: border-box;height: 18px;font-size: 12px;float: left;color: #8d8d8d;}
+    .price_ div{background:rgb(116,24,27);margin:10px 0px 10px 10px;line-height:20px;color: white;}
+    .price p:nth-child(1),.price p:nth-child(3){width: 50px;height: 20px;border: 1px #e9e9e9 solid;background: #fff;padding: 0 1px;box-sizing: border-box;display: block;margin-top: 10px;}
+    .price p:nth-child(2){font-size: 10px;margin: 0 2px;color: #8d8d8d;}
+    .price p span{float: left;height: 18px;line-height: 18px;font-size: 10px;color: #8d8d8d;margin: 0 2px;}
+    .price p input{width: 32px;padding: 0 2px;box-sizing: border-box;height: 18px;font-size: 12px;float: left;color: #8d8d8d;}
+
+    /* 物品列表 */
+    .prices{width:70px;float:left;position: relative;}
+    .plist{display: none;width:75px;position:absolute;background: #e9e9e9;}
+    
+    .all ul li span{float:right; margin-right: 30px;}
+    .all ul li a:hover{color:white;}
+    .plist li a:hover{color: rgb(116,24,27);}
+    .list{width:120px;height:auto;position: fixed;right:-0.3%;top:30%;background: white;text-align: center;border:}
+    .list li{line-height: 28px; }
+    .list li:hover{background:rgb(116,24,27);color:white;}
+    .list li span{font-size: 14px;line-height: 28px;}
+    .list li img:nth-child(1){margin:5px 0px 0px -19px;}
+    .list li img:nth-child(2){ margin:0 auto;}
+    .list li:last-child{display: flex;flex-direction: column;height:35px;line-height: 20px;}
+    .goods_list{width: 100%;height: auto;margin-top: 10px;margin-bottom: 104px;overflow: hidden;}
+    .goods_listf{width: 80%;height: auto;margin: 30px 0px 0px 30px;overflow: hidden;}
+   
+    .goods_listf li{width: 280px;height: 200px;margin: 0 27px 16px 0;border: 1px #e9e9e9 solid;box-sizing: border-box;float: left;}
+    .goods_list li{width: 234px;height: 344px;margin: 0 7px 16px 0;border: 1px #e9e9e9 solid;box-sizing: border-box;float: left;}
+    .goods_list li:nth-child(5n){margin-right: 0;}
+    .goods_list li>p:nth-child(1){width: 232px;height: 232px;background: cadetblue;background-size: 100% 100%;}
+    .goods_list li .information{height: 80px;width: 100%;padding: 10px;box-sizing: border-box;border-bottom: 1px #e9e9e9 solid;}
+    .information p:nth-child(1){font-size: 12px;margin-bottom: 15px;}
+    .information p:nth-child(2){font-size: 18px;color: #DE0812;font-weight: 600;}
+    .information p:nth-child(2) span{font-size: 8px;}
+    .appraise{height: 30px;line-height: 30px;padding: 0 10px;box-sizing: border-box;}
+    .appraise p{color: #8d8d8d;font-size: 12px;float: left;}
+    .appraise p:nth-child(2){float: right;}
+    .appraise p>span{color: #DE0812;}
+    .pages{display: flex;flex-direction: row;justify-content: center;padding-bottom: 120px;}
+    .pages p{width:33px;height:33px;border: 1px #e9e9e9 solid;line-height: 33px;text-align: center;margin-right: 4px;color: rgb(121,121,121);float: left;}
+    .pages p:nth-child(2),.pages p:hover{background: rgb(116,24,27);color: white;}
+    .pages p:last-child{margin: 0;width: 58px;}
+</style>
+<style rel="stylesheet" href="layui/css/layui.css"></style>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type='text/javascript' src="js/layer-v3.1.1/layer/layer.js"></script>
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+  <div class="head"> 
+    <div class="head-t">
+        <div class="top">
+            <ul>
+                <li>欢迎来到怀南会</li>
+                <li>0519-86888690</li>
+                <li>客服在线时间9:00-23:00</li>
+            </ul>
+            <ul>
+                <li>翡翠和田玉彩宝文玩零售批发平台</li>
+                <li>手机版怀南会<span><i></i>会员中心</span></li>
+                <li>请登录/免费注册</li>
+            </ul>
+        </div>
+    </div>
+    <div class="head-c">
+        <div id="logo">
+            <p>怀南会</p>
+            <span></span>
+        </div>
+        <div class="search">
+            <form action="/search" name="search_form" method="get" id="search_form">
+                <input type="text" name="keyword" autocomplete="off" placeholder="请输入您要搜索的关键词">
+                <div class="btn" rel="search_btn">
+                    <div><span onclick="">搜索</span></div>
+                </div>
+            </form>
+        </div>
+        <div class="qrcode"></div>
+    </div> 
+    <div class="nav">
+        <ul>
+            <li class="all"><i></i><a herf=''>所有商品分类</a>
+            <ul>
+                  
+                    <li><a href="">翡翠</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="">和田玉</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">文玩收藏</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">玉石陶瓷</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">文房篆刻</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">天然宝石</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">洋酒红酒</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">宝石收藏</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">健康养生</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                    <li><a href="#">茶叶紫砂</a>&nbsp;&nbsp;&nbsp;&nbsp;<span>></span></li>
+                </ul>
+    
+  </li>
+             
+            <li>首页</li>
+            <li>新人专享</li>
+            <li>团购</li>
+            <li>秒杀</li>
+            <li>买家互动</li>
+            <li>积分商城</li>
+            <li>关于我们</li>
+            <li>百科资讯</li>
+            <li>商家入驻</li>
+        </ul>
+     
+    </div>
+  
+</div>    
+ 
+<div class="layui-carousel" id="test3" lay-filter="test1">
+    <div carousel-item="">
+      <div>条目1</div>
+      <div>条目2</div>
+      <div>条目3</div>
+      <div>条目4</div>
+      <div>条目5</div>
+    </div>
+</div>
+<ul class="list">
+                  
+        <li><span>翡翠</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><sapn>和田玉</sapn></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>文玩收藏</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>玉石陶瓷</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>文房篆刻</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>天然宝石</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>洋酒红酒</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>宝石收藏</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>健康养生</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><span>茶叶紫砂</span></li>
+        <div style="width:60%;border-bottom: 1px solid #d0d0d0;margin:0 auto;"></div>
+        <li><img src="./img/Customer_ Service.png" alt=""><span>在线客服</span></li>
+       
+        <li ><img src="./img/up_arrow.png" alt="" style="margin:2px auto;"><span class="topp">返回顶部</span></li>
+        
+    </ul>
+<div class="content">
+    <div style="width: 100%;height:auto;position:relative;">
+            <ul class="goods_listf">
+                    <li>
+                        <p>图片</p>
+                       
+                    </li>
+                    <li>
+                        <p>图片</p>
+                       
+                        
+                    </li>
+                    <li>
+                        <p>图片</p>
+                       
+                    </li></ul>
+                    
+                         
+                          
+                    
+                
+    </div>
+        <div style="width:100%;height:100px;background: #8d8d8d;"></div>
+
+  <div class='content_c'>
+      <p>翡翠</p>
+      <p>销量</p>
+      <li class="prices"><a herf=''>价格</a><i>&or;</i>
+        <ul class="plist">
+                                  
+                <li ><a href="#">价格从低到高</li>
+                    <li><a href="#">价格从高到低</li>
+            </ul></li>
+      <div class="price">
+          <p><span>¥</span><input type= "number"></p>
+          <p>-</p>
+          <p><span>¥</span><input type="number"></p>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="price_">
+            <p><span>¥</span><input type= "number"></p>
+            <p>-</p>
+            <p><span>¥</span><input type="number"></p>
+            <div>确定</div>
+        </div>
+        <p><span>吊坠</span>&nbsp;&nbsp;&nbsp;<span>手镯项链</span>&nbsp;&nbsp;&nbsp;<span>镶嵌翡翠</span>&nbsp;&nbsp;&nbsp;<span>把玩件</span>&nbsp;&nbsp;&nbsp;<span>更多</span><span>></span></p>
+  </div>
+  <ul class="goods_list">
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+      <li>
+          <p>图片</p>
+          <div class="information">
+              <p>冰锐清水翡翠平安镯</p>
+              <p><span>¥</span>36000.00</p>
+          </div>
+          <div class="appraise">
+              <p>★★★☆☆</p>
+              <p><span>0</span>人点评</p>
+          </div>
+      </li>
+  </ul>
+  
+  <div class="pages">
+      <p>&lt;</p>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>&gt;</p>
+      <p>尾页</p>
+  </div>
+</div>
+<div class="news"> 
+  <div class="news_box">
+      <div class="new_l">
+          <div class="new_title">
+              <p>媒体报道</p>
+              <p>更多> </p>
+          </div>
+          <div class="new_content">
+              <p></p>
+              <p>
+                  <span>中华孝道园入选《民族品牌之路》特别节目</span>
+                  <span>"社会诚信，国之根本"。2019年7月6日。常州孝道文化产业股份有限公司总裁温宁力女士受央......</span>
+              </p>
+              <div class="new_bottom">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+          </div>
+      </div>
+      <div class="new_r">
+          <div class="new_title">
+              <p>怀南会资讯</p>
+              <p>更多> </p>
+          </div>
+          <div class="new_content">
+              <ul>
+                  <li>百科资讯</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+              </ul>
+              <ul>
+                  <li>珠宝知识</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+              </ul>
+              <ul>
+                  <li>问答</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+                  <li>呆在这想学习反倒是客户的反馈的范德萨发大</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="foot-t">
+      <ul>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>源头直供</span>
+                  <span>无中间商 确保低价</span>
+              </p>
+          </li>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>品质保障</span>
+                  <span>品质护航 购物无忧</span>
+              </p>
+          </li>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>七天无理由退换</span>
+                  <span>为您提供售后无忧保障</span>
+              </p>
+          </li>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>保价配送</span>
+                  <span>支持退换 安全便捷</span>
+              </p>
+          </li>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>质检监督</span>
+                  <span>正品保障 支持复检</span>
+              </p>
+          </li>
+          <li>
+              <i>图标</i>
+              <p>
+                  <span>实物拍摄</span>
+                  <span>相机拍摄 真实还原</span>
+              </p>
+          </li>
+      </ul>
+  </div>
+  <div class="foot-b">
+      <ul>
+          <li>关于我们</li>
+          <li>发展沿革</li>
+          <li>组织架构图</li>
+          <li>发展愿景</li>
+          <li>团队介绍</li>
+      </ul>
+      <span></span>
+      <ul>
+          <li>帮助中心</li>
+          <li>购买翡翠常遇问题</li>
+          <li>无忧退货</li>
+          <li>怀南会承诺</li>
+          <li>发票说明</li>
+      </ul>
+      <span></span>
+      <ul>
+          <li>支付方式</li>
+          <li>支付宝</li>
+          <li>微信支付</li>
+          <li>银行卡汇款/转账</li>
+      </ul>
+      <span></span>
+      <ul class="qr_phone">
+          <li>
+              <i></i>
+              <span><i></i>iPhone</span>
+          </li>
+          <li>
+              <i></i>
+              <span><i></i>Android</span>
+          </li>
+      </ul>
+  </div>
+  <div class="foot">
+      <p>电话：0519-86888690&nbsp;周一到周六&nbsp;09:00-22:00&nbsp;&nbsp;苏ICP备19046182号-1</p>
+      <p>版权所有©2016-2019&nbsp;常州怀南汇商务服务有限公司</p>
+  </div>
+</div>
+
+
+ 
+
+ 
+
+ 
+          
+<script src="layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    $(".topp").click(function(){
+        console.log("11118")
+               $('body,html').animate({scrollTop:0},800);
+               return false;
+        });  
+    $(function(){
+                $('.all').mouseover(
+                    console.log("111"),
+                    function(){
+                        console.log("27")
+                        $(this).children('ul').show();
+                    }
+                );
+                $('.all').mouseout(
+                    function(){
+                        $(this).children('ul').hide()
+                    }
+                )
+            }) 
+            $(function(){
+                $('.prices').mouseover(
+                    console.log("189"),
+                    function(){
+                        console.log("277")
+                        $('.plist').show();
+                    }
+                );
+                $('.prices').mouseout(
+                    function(){
+                        console.log("278")
+                        $('.plist').hide()
+                    }
+                )
+            }) 
+            $(function(){
+                $('.list').mouseover(
+                    console.log("111"),
+                    function(){
+                        console.log("28")
+                        $(this).children('ul').show();
+                    }
+                );
+                $('.list').mouseout(
+                    function(){
+                        $(this).children('ul').hide()
+                    }
+                )
+            }) 
+layui.use(['carousel', 'form'], function(){
+  var carousel = layui.carousel
+  ,form = layui.form;
+  
+  //常规轮播
+  carousel.render({
+    elem: '#test1'
+    ,arrow: 'always'
+  });
+  
+  //改变下时间间隔、动画类型、高度
+  carousel.render({
+    elem: '#test2'
+    ,interval: 1800
+    ,anim: 'fade'
+    ,width:"100%"
+    ,height: '120px'
+  });
+  
+  //设定各种参数
+  var ins3 = carousel.render({
+    elem: '#test3'
+  });
+  //图片轮播
+  carousel.render({
+    elem: '#test3'
+    ,anim: 'fade'
+    ,width: '1520px'
+    ,height: '440px'
+    ,interval: 2000
+  });
+  
+  //事件
+  carousel.on('change(test4)', function(res){
+    console.log(res)
+  });
+  
+  var $ = layui.$, active = {
+    set: function(othis){
+      var THIS = 'layui-bg-normal'
+      ,key = othis.data('key')
+      ,options = {};
+      
+      othis.css('background-color', '#5FB878').siblings().removeAttr('style'); 
+      options[key] = othis.data('value');
+      ins3.reload(options);
+    }
+  };
+  
+  //监听开关
+  form.on('switch(autoplay)', function(){
+    ins3.reload({
+      autoplay: this.checked
+    });
+  });
+  
+  $('.demoSet').on('keyup', function(){
+    var value = this.value
+    ,options = {};
+    if(!/^\d+$/.test(value)) return;
+    
+    options[this.name] = value;
+    ins3.reload(options);
+  });
+  
+  //其它示例
+  $('.demoTest .layui-btn').on('click', function(){
+    var othis = $(this), type = othis.data('type');
+    active[type] ? active[type].call(this, othis) : '';
+  });
+});
+</script>
+
+</body>
+</html>

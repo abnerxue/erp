@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+</head>
+<link rel="stylesheet" href="./css/foot.css">
+<link rel="stylesheet" href="./css/head.css">
+<link rel="stylesheet" href="./css/news.css">
+<style>
+    *{margin:0;padding:0;}
+    li{list-style:none }
+    img{vertical-align:top;border:none}
+    i{font-style: normal;}
+    button{border: 0;outline: none; }
+    .content{min-height: 600px;width: 1200px;margin: 0 auto;padding-top: 116px;}
+    .content .content_pic{width: 520px;margin: 0 120px 65px 20px;background: rosybrown;height: 400px;float: left;box-sizing: border-box;}
+    .content .content_login{float: left;width: 446px;height: 465px;border: 2px #e9e9e9 solid;}
+    .content_login ul{width: 100%;height: 62px;border-bottom: 1px #e9e9e9 solid;padding: 0 60px;line-height: 62px;;box-sizing: border-box;}
+    .content_login ul li{float: left;padding: 0 40px;font-size: 20px;color: rgb(128,128,128);font-weight: 800;cursor: pointer;}
+    .content_login ul span{float: left;width: 1px;border-left: 2px #e9e9e9 solid;line-height: 62px;height: 20px;margin-top: 22px;}
+    .content_login ul li:hover,.content_login ul li:first-child{color: rgb(119,36,38);font-weight: 600;}
+    .content_login>div{padding: 40px 33px 36px 33px;}
+    .content_login>div .phone{margin-bottom: 24px;}
+    .content_login>div .phone,.content_login>div .test_num{width: 378px;height: 48px;border: 2px #e9e9e9 solid;}
+    .content_login .phone p{width: 106px;height: 48px;line-height:48px;border-right: 2px #e9e9e9 solid;font-size: 18px;text-align: center;color: #575776;float: left;}
+    .content_login .phone input{border: 0;float: left;outline: none;width: 270px;height: 48px;line-height: 48px;font-size: 15px;padding: 0 16px;box-sizing: border-box;}
+    input[type=number] {-moz-appearance:textfield;}
+    input[type=number]::-webkit-inner-spin-button,  input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none;}
+    .phone_login{display: none;}
+    .content_login .test_num input{border: 0;float: left;outline: none;width: 270px;height: 48px;line-height: 48px;font-size: 15px;padding: 0 18px;box-sizing: border-box;}
+    .content_login .test_num button{width: 108px;height: 48px;font-size: 15px;text-align: center;line-height: 48px;background: #e9e9e9;color: rgb(123,123,123);}
+    .content_login .login_btn{width: 378px;height: 48px;border: 2px #542628 solid;background: rgb(116,24,27);color: white;font-size: 20px;margin-top: 60px;}
+    .content_login .c_other{width: 100%;margin-top: 60px;height: 20px;line-height: 20px;}
+    .content_login .c_other p:nth-child(1){float: left;color: #767676;cursor: pointer;}
+    .content_login .c_other p:nth-child(1) i,.content_login .c_other p:nth-child(2) i{display: inline-block;width: 20px;height: 20px;background: yellowgreen;text-align: center;margin-right: 5px;}
+    .content_login .c_other p:nth-child(2){float: right;font-size: 15px;color: rgb(119,36,38);cursor: pointer;}
+</style>
+<body>
+    <div class="head"> 
+        <div class="head-t">
+            <div class="top">
+                <ul>
+                    <li>欢迎来到怀南会</li>
+                    <li>0519-86888690</li>
+                    <li>客服在线时间9:00-23:00</li>
+                </ul>
+                <ul>
+                    <li>翡翠和田玉彩宝文玩零售批发平台</li>
+                    <li>手机版怀南会<span><i></i>会员中心</span></li>
+                    <li>请登录/免费注册</li>
+                </ul>
+            </div>
+        </div>
+        <div class="head-c">
+            <div id="logo">
+                <p>怀南会</p>
+                <span></span>
+            </div>
+            <div class="search">
+                <form action="/search" name="search_form" method="get" id="search_form">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="请输入您要搜索的关键词">
+                    <div class="btn" rel="search_btn">
+                        <div><span onclick="">搜索</span></div>
+                    </div>
+                </form>
+            </div>
+            <div class="qrcode"></div>
+        </div> 
+        <div class="nav">
+            <ul>
+                <li><i></i>所有商品分类</li>
+                <li>首页</li>
+                <li>新人专享</li>
+                <li>团购</li>
+                <li>秒杀</li>
+                <li>买家互动</li>
+                <li>积分商城</li>
+                <li>关于我们</li>
+                <li>百科资讯</li>
+                <li>商家入驻</li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content_pic"></div>
+        <div class="content_login">
+            <ul>
+                <li id="name_l">账户登录</li>
+                <span></span>
+                <li id="phone_l">手机登录</li>
+            </ul>
+            <div class="phone_login">
+                <div class="phone">
+                    <p>手机号码</p>
+                    <input type="number" placeholder="请输入手机号码">
+                </div>
+                <div class="test_num">
+                    <input type="number" name="" placeholder="请输入手机验证码">
+                    <button>发送验证码</button>
+                </div>
+                <button class="login_btn">登&nbsp;&nbsp;录</button>
+                <div class="c_other">
+                    <p><i>○</i>微信登录</p>
+                    <p><i>></i>免费注册</p>
+                </div>
+            </div>
+            <div class="name_login">
+                <div class="phone">
+                    <p>用&nbsp;户&nbsp;名</p>
+                    <input type="number" placeholder="请输入用户名/手机号">
+                </div>
+                <div class="phone" style="margin-bottom: 0;">
+                    <p>登录密码</p>
+                    <input type="password" placeholder="请输入密码">
+                </div>
+                <button class="login_btn">登&nbsp;&nbsp;录</button>
+                <div class="c_other">
+                    <p><i>○</i>微信登录</p>
+                    <p><i>></i>免费注册</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="foot-t">
+            <ul>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>源头直供</span>
+                        <span>无中间商 确保低价</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>品质保障</span>
+                        <span>品质护航 购物无忧</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>七天无理由退换</span>
+                        <span>为您提供售后无忧保障</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>保价配送</span>
+                        <span>支持退换 安全便捷</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>质检监督</span>
+                        <span>正品保障 支持复检</span>
+                    </p>
+                </li>
+                <li>
+                    <i>图标</i>
+                    <p>
+                        <span>实物拍摄</span>
+                        <span>相机拍摄 真实还原</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="foot-b">
+            <ul>
+                <li>关于我们</li>
+                <li>发展沿革</li>
+                <li>组织架构图</li>
+                <li>发展愿景</li>
+                <li>团队介绍</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>帮助中心</li>
+                <li>购买翡翠常遇问题</li>
+                <li>无忧退货</li>
+                <li>怀南会承诺</li>
+                <li>发票说明</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>支付方式</li>
+                <li>支付宝</li>
+                <li>微信支付</li>
+                <li>银行卡汇款/转账</li>
+            </ul>
+            <span></span>
+            <ul>
+                <li>媒体报道</li>
+                <li>奇迹太湖湾之孝道中华</li>
+            </ul>
+            <div class="qr"></div>
+        </div>
+        <div class="foot">
+            <p>电话：0519-86888690&nbsp;周一到周六&nbsp;09:00-22:00&nbsp;&nbsp;苏ICP备19046182号-1</p>
+            <p>版权所有©2016-2019&nbsp;常州怀南汇商务服务有限公司</p>
+        </div>
+    </div>
+</body>
+<script>
+    var a = document.getElementsByClassName('phone_login')[0]; //手机登录
+    var b = document.getElementsByClassName('name_login')[0]; //账号登录
+    document.getElementById('phone_l').onclick = function(){
+        a.style.display = 'block';
+        b.style.display = 'none';
+        document.getElementById('name_l').style = 'color: rgb(128,128,128);font-weight: 600;';
+        document.getElementById('phone_l').style = 'color: rgb(119,36,38);font-weight: 600;';
+    }
+    document.getElementById('name_l').onclick = function(){
+        a.style.display = 'none';
+        b.style.display = 'block';
+        document.getElementById('name_l').style = 'color: rgb(119,36,38);font-weight: 600;';
+        document.getElementById('phone_l').style = 'color: rgb(128,128,128);font-weight: 600;';
+
+    }
+</script>
+</html>

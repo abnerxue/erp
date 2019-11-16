@@ -1,0 +1,29 @@
+.head{width: 100%;height: 179px;box-shadow: 0 1px 12px #888888;min-width: 1200px;}
+.head-t{width:100%;height: 40px;background: rgb(245,245,245);}
+.top{height: 40px;width: 1200px;margin: 0 auto;background: rgb(245,245,245);}
+.top ul:nth-child(1){float: left;margin: 12px 0;}
+.top ul li{float: left;padding: 0 8px;font-size: 11px;border-right: 1px #8D8D8D solid;color: #8D8D8D;}
+.top ul li:nth-child(1){padding-left: 0;}
+.top ul li:last-child{padding-right: 0;border: 0;}
+.top ul:nth-child(2){float: right;margin: 12px 0;}
+.top ul:nth-child(2) li:nth-child(2) span{margin-left: 15px;color: rgb(242,208,134);}
+.head-c{width: 1200px;height: 99px;margin: 0 auto;display: flex;flex-direction: row;position: relative;}
+.head-c .qrcode{position: absolute; top: 18px;right: 52px;width: 83px;height: 83px;background: blanchedalmond;}
+.head-c #logo{margin: 15px 0 0 50px;height: 64px;width: 198px;position: relative;}
+.head-c #logo p{position: absolute;top: -999px;}
+.head-c #logo span{width: 198px;height: 65px;float: left;position: absolute;background: url(../img/logo_index.png) no-repeat;top: 0;left: 0;background-size: 100% 100%;}
+.head-c .search{width: 476px;height: 40px;margin-left: 136px;float: left;margin-top: 30px;border: 1px rgb(116,24,27) solid;box-sizing: border-box;}
+.head-c .search input{width: 394px;height: 37px;float: left;border: none;outline: none;padding: 0 12px;box-sizing: border-box;font-size: 12px;    margin-top: 1px;margin-left: 1px;}
+.head-c .search .btn{width: 79px;height: 38px;background:rgb(116,24,27);float: right;line-height: 38px;text-align: center;color: white;font-size: 12px;} 
+.nav{width: 1200px;margin: 0 auto;height: 40px;}
+.nav ul{width: 100%;height: 100%;font-size: 16px;}
+
+.nav ul li{font-weight: 600;float: left;height: 40px;line-height: 40px;padding: 0 17px;cursor: pointer;}
+.nav ul li:hover{color: rgb(104,29,33);}
+.nav ul li:nth-child(1){padding: 0;width: 200px;height: 40px;background: rgb(116,24,27);color: white;line-height: 40px;text-align: center;}
+.nav ul li:nth-child(1) ul{padding: 0;width:200px;height:auto;margin:0 auto;display: none;}
+.nav ul li:nth-child(1) ul li{padding:0;width:200px;height:auto;font-size:16px;text-align: center;background:white;margin:0 auto;position:relative;color: #8D8D8D;border:1px solid rgb(116,24,27);border-top:none;border-bottom:none;position: relative;z-index: 1000; }
+.nav ul li:nth-child(1) ul li:last-child{border-bottom: 1px solid rgb(116,24,27);}
+.nav ul li:nth-child(1) ul a{text-decoration:none;color:rgb(116,24,27);}
+
+.nav ul li:nth-child(2){margin-left: 34px;}
